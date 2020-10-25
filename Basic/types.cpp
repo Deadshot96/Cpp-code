@@ -30,12 +30,16 @@ int main(int argc, char const *argv[])
     float fVar = 23434.4;
     double dVar = 23.3;
     long double ldVar = 23.32;
+    char ch = '3';
+    bool b = true;
     cout << "int:     " << sizeof(intVar) << endl;
     cout << "short:     " << sizeof(shortVar) << endl;
     cout << "us int:    " << sizeof(usVar) << endl;
     cout << "float:     " << sizeof(fVar) << endl;
     cout << "double:    " << sizeof(dVar) << endl;
     cout << "longdouble:" << sizeof(ldVar) << endl;
+    cout << "char:      " << sizeof(ch) << endl;
+    cout << "bool:      " << sizeof(b) << endl;
 
     cout << "in Hex: "<< hex << intVar;
 
