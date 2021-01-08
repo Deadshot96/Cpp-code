@@ -16,7 +16,7 @@ class Node{
         }
 
         void show(){
-            cout << "Key: " << key << "Data: " << data << endl;
+            cout << "Key: " << key << "\tData: " << data << endl;
         }
 };
 
@@ -97,14 +97,14 @@ bool CircularLinkedList :: update(int key, int data){
             return true;
         }
         ptr = ptr->next;
-        flag = (ptr == head)
+        flag = (ptr == head);
     }
     return false;
 }
 
 void CircularLinkedList :: append(int key, int data = 0){
-    Node node = new Node(key, data);
-    if (head == nullptr){
+    Node* node = new Node(key, data);
+    if (isEmpty()){
         head = node;
         head->next = head;
     }
@@ -123,6 +123,28 @@ void CircularLinkedList :: append(int key, int data = 0){
     size++;
 }
 
+void CircularLinkedList :: prepend(int key, int data = 0){
+    Node* node = new Node(key, data);
+
+    if(isEmpty()){
+        head = node;
+        head->next = head;
+    }
+    else{
+        Node* ptr = head;
+        bool flag = true;
+
+        while (flag){
+            ptr = ptr->next;
+            flag = (ptr->next != head);
+        }
+        ptr->next = node;
+        node->next = head;
+        head = node;
+    }
+    size++;
+};
+
 
 
 
@@ -130,6 +152,14 @@ int main(){
     cout << "Hello, World!\n";
 
     CircularLinkedList L;
+    
+    for (int i = 1; i < 10; i++)
+    {
+        L.append(i, i*i);
+    }
 
+    L.prepend(0, 0);
+    
+    L.traverse();
     return 0;
 }
