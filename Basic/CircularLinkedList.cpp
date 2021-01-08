@@ -198,7 +198,35 @@ void CircularLinkedList :: insertBefore(int keyB, int key, int data = 0){
     
 }
 
+bool CircularLinkedList :: remove(int key){
 
+    if (isEmpty())
+        return false;
+
+    Node* ptr = head->next;
+    Node* prev = head;
+    bool flag = true;
+    bool found = false;
+
+    while (flag){
+        if (ptr->key == key){
+            found = true;
+            break;
+        }
+        prev = ptr;
+        ptr = ptr->next;
+        flag = (prev != head);
+    }
+
+    if (found){
+        prev->next = ptr->next;
+        if (ptr == head)
+            head = prev->next;
+        delete ptr;
+        size--;
+    }
+    return false;
+}
 
 
 int main(){
@@ -214,7 +242,7 @@ int main(){
     L.prepend(0, 0);
     L.insertAfter(9, 10, 100);
     L.insertBefore(0, -1, 1);
-    L.insertBefore(3, 10, 2);
+    L.remove(10);
     L.traverse();
     return 0;
 }
