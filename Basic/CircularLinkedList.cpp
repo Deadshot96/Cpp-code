@@ -171,6 +171,33 @@ void CircularLinkedList :: insertAfter(int keyA, int key, int data = 0){
     }
 }
 
+void CircularLinkedList :: insertBefore(int keyB, int key, int data = 0){
+    Node* ptr = head;
+    Node* prev = nullptr;
+    bool flag = (ptr == nullptr), found = false;
+
+    while (!flag){
+        if (ptr->key == keyB){
+            found = true;
+            break;
+        }
+        prev = ptr;
+        ptr = ptr->next;
+        flag = (ptr == head);
+    }
+
+    if (!found || (prev == nullptr)){
+        prepend(key, data);
+    }
+    else{
+        Node* node = new Node(key, data);
+        node->next = prev->next;
+        prev->next = node;
+        size++;
+    }
+    
+}
+
 
 
 
@@ -186,6 +213,8 @@ int main(){
 
     L.prepend(0, 0);
     L.insertAfter(9, 10, 100);
+    L.insertBefore(0, -1, 1);
+    L.insertBefore(3, 10, 2);
     L.traverse();
     return 0;
 }
