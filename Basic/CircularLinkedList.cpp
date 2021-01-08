@@ -103,7 +103,24 @@ bool CircularLinkedList :: update(int key, int data){
 }
 
 void CircularLinkedList :: append(int key, int data = 0){
-    
+    Node node = new Node(key, data);
+    if (head == nullptr){
+        head = node;
+        head->next = head;
+    }
+    else{
+        Node* ptr = head;
+        bool flag = true;
+
+        while (flag){
+            ptr = ptr->next;
+            flag = (ptr->next != head);
+        }
+
+        ptr->next = node;
+        node->next = head;
+    }
+    size++;
 }
 
 
