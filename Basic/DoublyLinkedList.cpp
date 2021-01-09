@@ -32,6 +32,8 @@ class DoublyLinkedList{
         DoublyLinkedList();
         void append(int key, int data);
         void prepend(int key, int data);
+        void insertAfter(int keyA, int key, int data);
+        void insertBefore(int keyB, int key, int data);
         int getSize();
         bool isEmpty();
         void traverse();
@@ -118,6 +120,31 @@ void DoublyLinkedList :: prepend(int key, int data=0){
     size++;
 }
 
+void DoublyLinkedList :: insertAfter(int keyA, int key, int data = 0){
+    Node* ptr = head;
+    bool found = false;
+
+    while (ptr != nullptr){
+        if (ptr->key == keyA){
+            found = true;
+            break;
+        }
+        ptr = ptr->next;
+    }
+
+    if (!found){
+        append(key, data);
+    }
+    else{
+        Node* node = new Node(key, data, ptr, ptr->next);
+        
+        if (ptr->next != nullptr)
+            ptr->next->prev = node;
+        
+        ptr->next = node;
+        size++;
+    }
+}
 
 int main()
 {
