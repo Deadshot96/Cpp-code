@@ -67,7 +67,7 @@ bool DoublyCircularLinkedList :: isEmpty(){
     return size == 0;
 }
 
-bool DoublyCircularLinkedList :: traverse(){
+void DoublyCircularLinkedList :: traverse(){
     Node* ptr = head;
     bool flag = (ptr == nullptr);
 
@@ -80,7 +80,7 @@ bool DoublyCircularLinkedList :: traverse(){
 
 bool DoublyCircularLinkedList :: search(int key){
     Node* ptr = head;
-    bool flag = (ptr == nullptr)
+    bool flag = (ptr == nullptr);
 
     while (!flag){
         if (ptr->key == key)
