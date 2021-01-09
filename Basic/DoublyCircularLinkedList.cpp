@@ -44,6 +44,19 @@ class DoublyCircularLinkedList{
         bool remove(int key);
         ~DoublyCircularLinkedList();
 
+};
+
+DoublyCircularLinkedList :: DoublyCircularLinkedList(){
+    this->head = nullptr;
+    this->size = 0;
+}
+
+DoublyCircularLinkedList :: ~DoublyCircularLinkedList(){
+    while (head != nullptr){
+        Node* ptr = head;
+        head = head->next;
+        delete ptr;
+    }
 }
 
 
@@ -52,5 +65,8 @@ class DoublyCircularLinkedList{
 int main()
 {
     cout << "Hello, World!" << endl;
+    DoublyCircularLinkedList L;
+
+
     return 0;
 }
