@@ -25,6 +25,30 @@ class Node{
         }
 };
 
+class DoublyCircularLinkedList{
+    private:
+        Node* head;
+        int size;
+
+    public:
+        DoublyCircularLinkedList();
+        int getSize();
+        bool isEmpty();
+        void traverse();
+        bool search(int key);
+        bool update(int key, int data);
+        void append(int key, int data);
+        void prepend(int key, int data);
+        void insertAfter(int keyA, int key, int data);
+        void insertBefore(int keyB, int key, int data);
+        bool remove(int key);
+        ~DoublyCircularLinkedList();
+
+}
+
+
+
+
 int main()
 {
     cout << "Hello, World!" << endl;
