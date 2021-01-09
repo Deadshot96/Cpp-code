@@ -192,6 +192,12 @@ void DoublyCircularLinkedList :: insertBefore(int keyB, int key, int data = 0){
     }
 }
 
+bool DoublyCircularLinkedList :: remove(int key){
+    if (isEmpty()){
+        return false;
+    }
+}
+
 int main()
 {
     cout << "Hello, World!" << endl;
