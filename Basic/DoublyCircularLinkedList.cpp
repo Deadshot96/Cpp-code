@@ -106,7 +106,7 @@ bool DoublyCircularLinkedList :: update(int key, int data){
     return false;
 }
 
-void DoublyCircularLinkedList :: append(int key, int data){
+void DoublyCircularLinkedList :: append(int key, int data = 0){
     Node* node = new Node(key, data);
 
     if (isEmpty()){
@@ -125,12 +125,33 @@ void DoublyCircularLinkedList :: append(int key, int data){
     size++;
 }
 
+void DoublyCircularLinkedList :: prepend(int key, int data = 0){
+    if (isEmpty()){
+        head = new Node(key, data);
+        head->next = head;
+        head->prev = head;
+    }
+    else{
+        Node* node = new Node(key, data, head->prev, head);
+        head->prev->next = node;
+        head->prev = node;
+        head = node;
+    }
+    size++;
+}
+
 
 int main()
 {
     cout << "Hello, World!" << endl;
     DoublyCircularLinkedList L;
 
-
+    for (int i = 2; i < 20; i+=2){
+        L.append(i, i*i);
+    }
+    L.prepend(0, 0);
+    cout << "Size of List: " << L.getSize() << endl;
+    L.traverse();
+    cout << "Done!";
     return 0;
 }
