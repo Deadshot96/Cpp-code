@@ -78,6 +78,20 @@ bool DoublyCircularLinkedList :: traverse(){
     }
 }
 
+bool DoublyCircularLinkedList :: search(int key){
+    Node* ptr = head;
+    bool flag = (ptr == nullptr)
+
+    while (!flag){
+        if (ptr->key == key)
+            return true;
+        ptr = ptr->next;
+        flag = (ptr == head);
+    }
+    return false;
+}
+
+
 
 int main()
 {
