@@ -178,6 +178,39 @@ void DoublyLinkedList :: insertBefore(int keyB, int key, int data = 0){
     }
 }
 
+bool DoublyLinkedList :: remove(int key){
+    Node* ptr = head;
+    bool found = false;
+
+    while (ptr != nullptr){
+        if (ptr->key == key){
+            found = true;
+            break;
+        }
+        ptr = ptr->next;
+    }
+
+    if (!found){
+        return false;
+    }
+    else if (getSize() == 1){
+        head = nullptr;
+    }
+    else if (ptr == head){
+        ptr->next->prev = nullptr;
+    }
+    else if(ptr->next == nullptr){
+        ptr->prev->next = nullptr;
+    }
+    else{
+        ptr->prev->next = ptr->next;
+        ptr->next->prev = ptr->prev;
+    }
+    delete ptr;
+    size--;
+    return true;
+}
+
 
 int main()
 {
