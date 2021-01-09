@@ -106,6 +106,25 @@ bool DoublyCircularLinkedList :: update(int key, int data){
     return false;
 }
 
+void DoublyCircularLinkedList :: append(int key, int data){
+    Node* node = new Node(key, data);
+
+    if (isEmpty()){
+        head = node;
+        head->prev = head;
+        head->next = head;
+    }
+    else{
+        Node* tail = head->prev;
+        node->prev = tail;
+        node->next = head;
+        tail->next = node;
+        head->prev = node;
+    }
+
+    size++;
+}
+
 
 int main()
 {
