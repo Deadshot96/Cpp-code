@@ -225,10 +225,20 @@ int main()
     cout << "Hello, World!"<<endl;
     DoublyLinkedList L;
 
-    for (int i = 0; i < 20; i+=2)
+    for (int i = 2; i < 20; i+=2)
     {
         L.append(i, i*i);
     }
+    L.prepend(0, 0);
+    L.insertAfter(0, 1, 1);
+    L.insertAfter(4, 5, 25);
+    L.insertBefore(0, -1, 1);
+    L.insertAfter(18, 20, 400);
+
+    L.remove(-1);
+    L.remove(20);
+    L.remove(5);
+    L.remove(7);
     
     cout << "Size of the DoublyLinkedList is: " << L.getSize() << endl;
     L.traverse();
