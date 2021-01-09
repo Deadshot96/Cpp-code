@@ -146,6 +146,39 @@ void DoublyLinkedList :: insertAfter(int keyA, int key, int data = 0){
     }
 }
 
+void DoublyLinkedList :: insertBefore(int keyB, int key, int data = 0){
+    Node* ptr = head;
+    bool found = false;
+
+    while (ptr != nullptr){
+        if (ptr->key == keyB){
+            found = true;
+            break;
+        }
+        ptr = ptr->next;
+    }
+
+
+    if (!found){
+        prepend(key, data);
+    }
+    else{
+        Node* node = new Node(key, data, ptr->prev, ptr);
+
+        if (ptr->prev != nullptr){
+            ptr->prev->next = node;
+        }
+        else{
+            head = node;
+        }
+
+        ptr->prev = node;
+        size++;
+
+    }
+}
+
+
 int main()
 {
     cout << "Hello, World!"<<endl;
