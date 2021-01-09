@@ -59,7 +59,17 @@ DoublyCircularLinkedList :: ~DoublyCircularLinkedList(){
     }
 }
 
+int DoublyCircularLinkedList :: getSize(){
+    return size;
+}
 
+bool DoublyCircularLinkedList :: isEmpty(){
+    return size == 0;
+}
+
+bool DoublyCircularLinkedList :: traverse(){
+
+}
 
 
 int main()
