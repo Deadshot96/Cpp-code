@@ -85,6 +85,26 @@ bool DoublyLinkedList :: update(int key, int data){
 
 }
 
+void append(int key, int data = 0){
+    Node* node = new Node(key, data);
+
+    if (isEmpty()){
+        head = node;
+    }
+    else{
+        Node* ptr = head;
+        while (ptr->next != null){
+            ptr = ptr->next;
+        }
+
+        ptr->next = node;
+        node->prev = ptr;
+    }
+
+    size++;
+}
+
+
 int main()
 {
     cout << "Hello, World!"<<endl;
