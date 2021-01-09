@@ -193,9 +193,40 @@ void DoublyCircularLinkedList :: insertBefore(int keyB, int key, int data = 0){
 }
 
 bool DoublyCircularLinkedList :: remove(int key){
-    if (isEmpty()){
+
+    Node* ptr = head;
+    bool flag = (ptr == nullptr), found = false;
+
+    while (!flag){
+        if (ptr->key == key){
+            found = true;
+            break;
+        }
+        ptr = ptr->next;
+        flag = (ptr == head);
+    }
+
+    if (!found){
         return false;
     }
+    else{
+        if (getSize() == 1){
+            delete head;
+            head = nullptr;
+        }
+        else{
+            ptr->prev->next = ptr->next;
+            ptr->next->prev = ptr->prev;
+
+            if (ptr == head)
+                head = ptr->next;
+
+            delete ptr;
+        }
+
+        size--;
+    }
+    return true;
 }
 
 int main()
@@ -215,6 +246,10 @@ int main()
     L.insertBefore(19, 17, 17*17);
     L.insertBefore(8, 7, 7*7);
 
+    L.remove(-1);
+    L.remove(19);
+    L.remove(14);
+    L.remove(20);
 
     cout << "Size of List: " << L.getSize() << endl;
     L.traverse();
