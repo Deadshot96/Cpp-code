@@ -91,6 +91,20 @@ bool DoublyCircularLinkedList :: search(int key){
     return false;
 }
 
+bool DoublyCircularLinkedList :: update(int key, int data){
+    Node* ptr = head;
+    bool flag = (ptr == nullptr);
+
+    while (!flag){
+        if (ptr->key == key){
+            ptr->data = data;
+            return true;
+        }
+        ptr = ptr->next;
+        flag = (ptr == head);
+    }
+    return false;
+}
 
 
 int main()
