@@ -39,8 +39,8 @@ class DoublyLinkedList{
         void traverse();
         bool search(int key);
         bool update(int key, int data);
-        void insert(int keyA, int key, int data);
         bool remove(int key);
+        ~DoublyLinkedList();
 };
 
 DoublyLinkedList :: DoublyLinkedList(){
@@ -211,10 +211,26 @@ bool DoublyLinkedList :: remove(int key){
     return true;
 }
 
+DoublyLinkedList :: ~DoublyLinkedList(){
+    while (head != nullptr){
+        Node* ptr = head;
+        head = head->next;
+        delete ptr;
+    }
+}
+
 
 int main()
 {
     cout << "Hello, World!"<<endl;
     DoublyLinkedList L;
+
+    for (int i = 0; i < 20; i+=2)
+    {
+        L.append(i, i*i);
+    }
+    
+    cout << "Size of the DoublyLinkedList is: " << L.getSize() << endl;
+    L.traverse();
     return 0;
 }
