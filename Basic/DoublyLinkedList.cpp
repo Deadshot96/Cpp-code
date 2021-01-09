@@ -85,7 +85,7 @@ bool DoublyLinkedList :: update(int key, int data){
 
 }
 
-void append(int key, int data = 0){
+void DoublyLinkedList :: append(int key, int data = 0){
     Node* node = new Node(key, data);
 
     if (isEmpty()){
@@ -93,7 +93,7 @@ void append(int key, int data = 0){
     }
     else{
         Node* ptr = head;
-        while (ptr->next != null){
+        while (ptr->next != nullptr){
             ptr = ptr->next;
         }
 
