@@ -104,6 +104,20 @@ void DoublyLinkedList :: append(int key, int data = 0){
     size++;
 }
 
+void DoublyLinkedList :: prepend(int key, int data=0){
+    Node* node = new Node(key, data);
+
+    if(isEmpty()){
+        head = node;
+    }
+    else{
+        node->next = head;
+        head->prev = node;
+        head = node;
+    }
+    size++;
+}
+
 
 int main()
 {
