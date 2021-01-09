@@ -140,6 +140,30 @@ void DoublyCircularLinkedList :: prepend(int key, int data = 0){
     size++;
 }
 
+void DoublyCircularLinkedList :: insertAfter(int keyA, int key, int data = 0){
+    Node* ptr = head;
+    bool flag = (ptr == nullptr), found = false;
+
+    while (!flag){
+        if (ptr->key == keyA){
+            found = true;
+            break;
+        }
+        ptr = ptr->next;
+        flag = (ptr == head);
+    }
+
+    if (!found){
+        append(key, data);
+    }
+    else{
+        Node* node = new Node(key, data, ptr, ptr->next);
+        ptr->next->prev = node;
+        ptr->next = node;
+        size++;
+    }
+
+}
 
 int main()
 {
@@ -150,6 +174,11 @@ int main()
         L.append(i, i*i);
     }
     L.prepend(0, 0);
+    L.insertAfter(18, 19, 19*19);
+    L.insertAfter(0, 1, 1);
+    L.insertAfter(4, 5, 5*5);
+
+
     cout << "Size of List: " << L.getSize() << endl;
     L.traverse();
     cout << "Done!";
