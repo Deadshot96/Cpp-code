@@ -68,7 +68,14 @@ bool DoublyCircularLinkedList :: isEmpty(){
 }
 
 bool DoublyCircularLinkedList :: traverse(){
+    Node* ptr = head;
+    bool flag = (ptr == nullptr);
 
+    while (!flag){
+        ptr->show();
+        ptr = ptr->next;
+        flag = (ptr == head);
+    }
 }
 
 
