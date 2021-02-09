@@ -14,6 +14,10 @@ class Node{
             this->data = data;
             this->next = next;
         }
+
+        void show(){
+            cout<<"Key: "<<key<<"\tData: "<<data<<endl;
+        }
 };
 
 class LinkedList{
@@ -33,6 +37,7 @@ class LinkedList{
         void traverse();
         bool search(int key);
         bool update(int key, int data);
+        Node* getLinkedListHead();
         ~LinkedList();
 };
 
@@ -194,24 +199,34 @@ void LinkedList :: insertBefore(int keyB, int key, int data = 0){
     }
 }
 
+Node* LinkedList :: getLinkedListHead(){
+    return head;
+}
+
+Node* mergeLists(Node* l1, Node* l2){
+    Node* out;
+    while ((l1 != nullptr) && (l2 != nullptr)){
+
+    }
+}
 
 
 
 int main(){
     cout << "Hello, World!" << endl;
-    LinkedList L;
+    // LinkedList L;
     
-    for (int i = 2; i < 20; i+=2)
-    {
-        L.append(i, i*i);
-    }
-    L.prepend(0);
-    L.insertBefore(0, -1, 1);
-    L.insertAfter(0, 1, 1);
+    // for (int i = 2; i < 20; i+=2)
+    // {
+    //     L.append(i, i*i);
+    // }
+    // L.prepend(0);
+    // L.insertBefore(0, -1, 1);
+    // L.insertAfter(0, 1, 1);
 
-    L.remove(18);
+    // L.remove(18);
 
-    cout << "Size of the Linked List: " << L.getSize() << "\n";
-    L.traverse();
+    // cout << "Size of the Linked List: " << L.getSize() << "\n";
+    // L.traverse();
     return 0;
 }
