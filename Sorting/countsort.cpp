@@ -25,7 +25,7 @@ int main()
 void CountSort(int arr[], int size){
     int minElement = getMin(arr, size), maxElement = getMax(arr, size);
     int range = maxElement - minElement + 1;
-    int freqArray[range] = {};
+    int freqArray[range] = {0};
 
     
     for (int i = 0; i < size; i++)
