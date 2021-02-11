@@ -83,6 +83,21 @@ void BinarySearchTree<Comparable> :: insert(const Comparable & x){
 }
 
 template <typename Comparable>
+void BinarySearchTree<Comparable> :: insert(const Comparable & rhs, BinaryNode * & t){
+    if (t == nullptr)
+        t = new BinaryNode{rhs};
+
+    else if (rhs < t->element)
+        insert(rhs, t->left);
+    
+    else if (rhs > t->element)
+        insert(rhs, t->right);
+
+    else/* Do nothing if same element occurs*/;
+}
+
+
+template <typename Comparable>
 void BinarySearchTree<Comparable> :: insert(Comparable && x){
     insert(x, root);
 }
