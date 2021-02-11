@@ -108,7 +108,18 @@ typename BinarySearchTree<Comparable> :: BinaryNode* BinarySearchTree<Comparable
         return t;
 }
 
+template <typename Comparable>
+const Comparable & BinarySearchTree<Comparable> :: findMin() const{
+    return findMin(root)->element;
+}
 
+template <typename Comparable>
+typename BinarySearchTree<Comparable> :: BinaryNode* BinarySearchTree<Comparable> :: findMin(BinaryNode *t) const{
+    if (t != nullptr)
+        while (t->left != nullptr)
+            t = t-> left;
+    return t;
+}
 
 
 
