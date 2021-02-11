@@ -8,23 +8,23 @@ class BinarySearchTree{
 
     public:
         BinarySearchTree(); // Zero Constructor
-        BinarySearchTree(const BinarySearchTree & rhs); // copy Constructor
-        BinarySearchTree(const BinarySearchTree && rhs); // move Constructor
+        BinarySearchTree(const BinarySearchTree &); // copy Constructor
+        BinarySearchTree(const BinarySearchTree &&); // move Constructor
         ~BinarySearchTree(); // Destructor
 
         const Comparable & findMax() const;
         const Comparable & findMin() const;
-        bool contains (const Comparable & key) const;
+        bool contains (const Comparable &) const;
         bool isEmpty() const;
         void printTree(ostream & out = cout) const;
 
         void makeEmpty();
-        void insert(const Comparable & x); // lvalue insert
-        void insert(Comparable && x); // rvalue insert
-        void remove(const Comparable & x);
+        void insert(const Comparable &); // lvalue insert
+        void insert(Comparable &&); // rvalue insert
+        void remove(const Comparable &);
 
-        BinarySearchTree & operator= (const BinarySearchTree & rhs); // copy assignment
-        BinarySearchTree & operator= (BinarySearchTree && rhs); // move assignment
+        BinarySearchTree & operator= (const BinarySearchTree &); // copy assignment
+        BinarySearchTree & operator= (BinarySearchTree &&); // move assignment
 
     private:
         struct BinaryNode{
@@ -42,17 +42,58 @@ class BinarySearchTree{
 
         BinaryNode *root;
 
-        void insert(const Comparable & x, BinaryNode * & t);
-        void insert(Comparable && x, BinaryNode * & t);
-        void remove(const Comparable & x, BinaryNode * & t);
-        BinaryNode * findMax(BinaryNode * t) const;
-        BinaryNode * findMin(BinaryNode * t) const;
-        bool contains (const Comparable & x, BinaryNode *t) const;
-        void makeEmpty(BinaryNode * & t);
-        void printTree(BinaryNode * t, ostream & out = cout) const;
-        BinaryNode * clone (BinaryNode * t) const;
+        void insert(const Comparable &, BinaryNode * &);
+        void insert(Comparable &&, BinaryNode * &);
+        void remove(const Comparable &, BinaryNode * &);
+        BinaryNode * findMax(BinaryNode *) const;
+        BinaryNode * findMin(BinaryNode *) const;
+        bool contains (const Comparable &, BinaryNode *) const;
+        void makeEmpty(BinaryNode * &);
+        void printTree(BinaryNode *, ostream & out = cout) const;
+        BinaryNode * clone (BinaryNode *) const;
 
 };
+
+template <typename Comparable>
+bool BinarySearchTree<Comparable> :: contains(const Comparable & key) const{
+    return contains(key, root);
+}
+
+template <typename Comparable>
+bool BinarySearchTree<Comparable> :: contains(const Comparable & key, BinaryNode *t) const{
+
+    if (t == nullptr){
+        return false;
+    }
+    else if (key < t->element){
+        return contains(key, t->left);
+    }
+    else if (key > t->element){
+        return contains(key, t->right);
+    }
+    else{
+        return true;
+    }
+    
+}
+
+template <typename Comparable>
+void BinarySearchTree<Comparable> :: insert(const Comparable & x){
+    insert(x, root);
+}
+
+template <typename Comparable>
+void BinarySearchTree<Comparable> :: insert(Comparable && x){
+    insert(x, root);
+}
+
+template <typename Comparable>
+void BinarySearchTree<Comparable> :: remove(const Comparable & x){
+    remove(x, root);
+}
+
+
+
 
 
 int main()
