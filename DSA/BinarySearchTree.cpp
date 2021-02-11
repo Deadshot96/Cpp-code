@@ -97,10 +97,19 @@ const Comparable & BinarySearchTree<Comparable> :: findMax () const{
     return findMax(root)->element;
 }
 
+
 template <typename Comparable> 
-BinarySearchTree<Comparable> :: BinaryNode* BinarySearchTree<Comparable> :: findMax (BinaryNode *t) const{
-    return t;
+typename BinarySearchTree<Comparable> :: BinaryNode* BinarySearchTree<Comparable> :: findMax (BinaryNode *t) const{
+    if (t == nullptr)
+        return nullptr;
+    else if (t->right != nullptr)
+        return findMax(t->right);
+    else
+        return t;
 }
+
+
+
 
 
 int main()
