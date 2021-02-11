@@ -74,7 +74,7 @@ bool BinarySearchTree<Comparable> :: contains(const Comparable & key, BinaryNode
     else{
         return true;
     }
-    
+
 }
 
 template <typename Comparable>
@@ -92,8 +92,15 @@ void BinarySearchTree<Comparable> :: remove(const Comparable & x){
     remove(x, root);
 }
 
+template <typename Comparable> 
+const Comparable & BinarySearchTree<Comparable> :: findMax () const{
+    return findMax(root)->element;
+}
 
-
+template <typename Comparable> 
+BinarySearchTree<Comparable> :: BinaryNode* BinarySearchTree<Comparable> :: findMax (BinaryNode *t) const{
+    return t;
+}
 
 
 int main()
