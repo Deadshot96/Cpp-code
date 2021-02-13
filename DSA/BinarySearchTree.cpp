@@ -1,5 +1,4 @@
 # include <iostream>
-# include <vector>
 using namespace std;
 
 
@@ -317,15 +316,16 @@ int main()
 {
     cout << "Hello, World!\n";
 
-    BinarySearchTree<float> t;
-    t.insert(3.4);
-    t.insert(6.2);
-    t.insert(1.2);
-    t.insert(3.1);
-    t.insert(1);
-    cout << t.getHeight() << endl;
-    t.printTree();
+    BinarySearchTree <int> t;
+    t.insert(0);
+    t.insert(-1);
+    t.insert(2);   
 
+    t.preorder();
+    t.inorder();
+    t.postorder();
+
+    t.printTree();
 
     return 0;
 }
