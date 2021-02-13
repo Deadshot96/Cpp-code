@@ -272,6 +272,7 @@ int BinarySearchTree<Comparable> :: getHeight(BinaryNode *t) const{
 
 template <typename Comparable>
 void BinarySearchTree<Comparable> :: preorder(ostream & out) const{
+    out << "Preorder Traversal: " << endl;
     preorder(root);
 }
 
@@ -286,6 +287,7 @@ void BinarySearchTree<Comparable> :: preorder(BinaryNode *t, ostream & out) cons
 
 template <typename Comparable>
 void BinarySearchTree<Comparable> :: inorder(ostream & out) const{
+    out << "Inorder Traversal: " << endl;
     inorder(root);
 }
 
@@ -300,6 +302,7 @@ void BinarySearchTree<Comparable> :: inorder(BinaryNode *t, ostream & out) const
 
 template <typename Comparable>
 void BinarySearchTree<Comparable> :: postorder(ostream & out) const{
+    out << "Postorder Traversal: " << endl;
     postorder(root);
 }
 
@@ -319,7 +322,12 @@ int main()
     BinarySearchTree <int> t;
     t.insert(0);
     t.insert(-1);
-    t.insert(2);   
+    t.insert(2);
+    t.insert(4);
+    t.insert(-4);
+
+    cout<<"Min is: "<<t.findMin()<<endl;
+    cout<<"Max is: "<<t.findMax()<<endl;
 
     t.preorder();
     t.inorder();
