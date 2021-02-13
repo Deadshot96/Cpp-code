@@ -200,6 +200,19 @@ BinarySearchTree<Comparable> :: BinarySearchTree(){
     root = nullptr;
 }
 
+template <typename Comparable>
+BinarySearchTree<Comparable> :: BinarySearchTree(const BinarySearchTree & rhs){
+    root = clone(rhs.root);
+}
+
+template <typename Comparable>
+typename BinarySearchTree<Comparable> :: BinaryNode * BinarySearchTree<Comparable> :: clone(BinaryNode *t) const {
+    if (t == nullptr)
+        return nullptr;
+    else
+        return new BinaryNode{t->element, clone(t->left), clone(t->right)};
+}
+
 int main()
 {
     cout << "Hello, World!\n";
