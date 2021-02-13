@@ -231,6 +231,22 @@ BinarySearchTree<Comparable> & BinarySearchTree<Comparable> :: operator= (Binary
     return *this;
 }
 
+template <typename Comparable>
+void BinarySearchTree<Comparable> :: printTree(ostream & out) const{
+    if (isEmpty())
+        out << "Empty Tree" <<endl;
+    else
+        printTree(root, out);
+}
+
+template <typename Comparable>
+void BinarySearchTree<Comparable> :: printTree(BinaryNode *t, ostream & out) const{
+    if (t != nullptr){
+        printTree(t->left, out);
+        out << t->element << endl;
+        printTree(t->right, out);
+    }
+}
 
 
 int main()
