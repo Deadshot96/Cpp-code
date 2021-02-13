@@ -22,6 +22,7 @@ class BinarySearchTree{
         void insert(const Comparable &); // lvalue insert
         void insert(Comparable &&); // rvalue insert
         void remove(const Comparable &);
+        int getHeight() const;
 
         BinarySearchTree & operator= (const BinarySearchTree &); // copy assignment
         BinarySearchTree & operator= (BinarySearchTree &&); // move assignment
@@ -51,6 +52,7 @@ class BinarySearchTree{
         void makeEmpty(BinaryNode * &);
         void printTree(BinaryNode *, ostream & out = cout) const;
         BinaryNode * clone (BinaryNode *) const;
+        int getHeight(BinaryNode *t) const;
 
 };
 
@@ -248,9 +250,33 @@ void BinarySearchTree<Comparable> :: printTree(BinaryNode *t, ostream & out) con
     }
 }
 
+template <typename Comparable>
+int BinarySearchTree<Comparable> :: getHeight() const{
+    return getHeight(root);
+}
+
+template <typename Comparable>
+int BinarySearchTree<Comparable> :: getHeight(BinaryNode *t) const{
+    if (t == nullptr)
+        return -1;
+    else
+        return 1 + max(getHeight(t->left), getHeight(t->right));
+}
+
 
 int main()
 {
     cout << "Hello, World!\n";
+
+    BinarySearchTree<float> t;
+    t.insert(3.4);
+    t.insert(6.2);
+    t.insert(1.2);
+    t.insert(3.1);
+    t.insert(1);
+    cout << t.getHeight() << endl;
+    t.printTree();
+
+
     return 0;
 }
