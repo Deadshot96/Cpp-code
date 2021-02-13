@@ -170,7 +170,25 @@ typename BinarySearchTree<Comparable> :: BinaryNode* BinarySearchTree<Comparable
     return t;
 }
 
+template <typename Comparable>
+BinarySearchTree<Comparable> :: ~BinarySearchTree(){
+    makeEmpty();
+}
 
+template <typename Comparable>
+void BinarySearchTree<Comparable> :: makeEmpty(){
+    makeEmpty(root);
+}
+
+template <typename Comparable>
+void BinarySearchTree<Comparable> :: makeEmpty(BinaryNode * & t){
+    if (t != nullptr){
+        makeEmpty(t->left);
+        makeEmpty(t->right);
+        delete t;
+    }
+    t = nullptr;
+}
 
 int main()
 {
