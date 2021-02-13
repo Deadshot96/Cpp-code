@@ -190,6 +190,11 @@ void BinarySearchTree<Comparable> :: makeEmpty(BinaryNode * & t){
     t = nullptr;
 }
 
+template <typename Comparable>
+bool BinarySearchTree<Comparable> :: isEmpty() const{
+    return root == nullptr;
+}
+
 int main()
 {
     cout << "Hello, World!\n";
