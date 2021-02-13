@@ -24,6 +24,10 @@ class BinarySearchTree{
         void remove(const Comparable &);
         int getHeight() const;
 
+        void preorder(ostream & out = cout) const;
+        void inorder(ostream & out = cout) const;
+        void postorder(ostream & out = cout) const;
+
         BinarySearchTree & operator= (const BinarySearchTree &); // copy assignment
         BinarySearchTree & operator= (BinarySearchTree &&); // move assignment
 
@@ -53,6 +57,10 @@ class BinarySearchTree{
         void printTree(BinaryNode *, ostream & out = cout) const;
         BinaryNode * clone (BinaryNode *) const;
         int getHeight(BinaryNode *t) const;
+
+        void preorder(BinaryNode *t, ostream & out = cout) const;
+        void inorder(BinaryNode *t, ostream & out = cout) const;
+        void postorder(BinaryNode *t, ostream & out = cout) const;
 
 };
 
@@ -263,6 +271,47 @@ int BinarySearchTree<Comparable> :: getHeight(BinaryNode *t) const{
         return 1 + max(getHeight(t->left), getHeight(t->right));
 }
 
+template <typename Comparable>
+void BinarySearchTree<Comparable> :: preorder(ostream & out) const{
+    preorder(root);
+}
+
+template <typename Comparable>
+void BinarySearchTree<Comparable> :: preorder(BinaryNode *t, ostream & out) const{
+    if (t != nullptr){
+        out << t->element << endl;
+        preorder(t->left, out);
+        preorder(t->right, out);
+    }
+}
+
+template <typename Comparable>
+void BinarySearchTree<Comparable> :: inorder(ostream & out) const{
+    inorder(root);
+}
+
+template <typename Comparable>
+void BinarySearchTree<Comparable> :: inorder(BinaryNode *t, ostream & out) const{
+    if (t != nullptr){
+        preorder(t->left, out);
+        out << t->element << endl;
+        preorder(t->right, out);
+    }
+}
+
+template <typename Comparable>
+void BinarySearchTree<Comparable> :: postorder(ostream & out) const{
+    postorder(root);
+}
+
+template <typename Comparable>
+void BinarySearchTree<Comparable> :: postorder(BinaryNode *t, ostream & out) const{
+    if (t != nullptr){
+        preorder(t->left, out);
+        preorder(t->right, out);
+        out << t->element << endl;
+    }
+}
 
 int main()
 {
