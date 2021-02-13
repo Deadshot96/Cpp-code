@@ -119,6 +119,28 @@ void BinarySearchTree<Comparable> :: remove(const Comparable & x){
     remove(x, root);
 }
 
+template <typename Comparable>
+void BinarySearchTree<Comparable> :: remove(const Comparable & x, BinaryNode * &t){
+    if (t == nullptr){
+        return;
+    }
+    else if(x < t->element){
+        remove(x, t->left);
+    }
+    else if(x > t->element){
+        remove(x, t->right);
+    }
+    else if(t->left != nullptr && t->right != nullptr){
+        t->element = findMin(t->right)->element;
+        remove(t->element, t->right);
+    }
+    else{
+        BinaryNode *oldNode = t;
+        t = (t->left != nullptr) ? t->left : t->right;
+        delete oldNode;
+    }
+}
+
 template <typename Comparable> 
 const Comparable & BinarySearchTree<Comparable> :: findMax () const{
     return findMax(root)->element;
