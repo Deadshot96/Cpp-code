@@ -218,6 +218,15 @@ BinarySearchTree<Comparable> :: BinarySearchTree(const BinarySearchTree && rhs) 
     rhs = nullptr;
 }
 
+template <typename Comparable>
+BinarySearchTree<Comparable> & BinarySearchTree<Comparable> :: operator= (const BinarySearchTree & rhs){
+    if (this != &rhs)
+        root = clone(rhs.root);
+    return *this;
+}
+
+
+
 int main()
 {
     cout << "Hello, World!\n";
