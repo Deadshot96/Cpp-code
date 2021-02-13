@@ -225,6 +225,12 @@ BinarySearchTree<Comparable> & BinarySearchTree<Comparable> :: operator= (const 
     return *this;
 }
 
+template <typename Comparable>
+BinarySearchTree<Comparable> & BinarySearchTree<Comparable> :: operator= (BinarySearchTree && rhs){
+    swap(root, rhs.root);
+    return *this;
+}
+
 
 
 int main()
