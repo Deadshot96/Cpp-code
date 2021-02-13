@@ -213,6 +213,11 @@ typename BinarySearchTree<Comparable> :: BinaryNode * BinarySearchTree<Comparabl
         return new BinaryNode{t->element, clone(t->left), clone(t->right)};
 }
 
+template <typename Comparable>
+BinarySearchTree<Comparable> :: BinarySearchTree(const BinarySearchTree && rhs) : root{rhs.root} {
+    rhs = nullptr;
+}
+
 int main()
 {
     cout << "Hello, World!\n";
