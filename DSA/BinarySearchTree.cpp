@@ -329,6 +329,12 @@ int main()
     cout<<"Min is: "<<t.findMin()<<endl;
     cout<<"Max is: "<<t.findMax()<<endl;
 
+    int j = t.findMax();
+    j = 23;
+
+    cout << "Max is: "<<j<<endl;
+
+    cout<<"Max is: "<<t.findMax()<<endl;
     t.preorder();
     t.inorder();
     t.postorder();
