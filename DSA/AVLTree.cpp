@@ -66,6 +66,7 @@ class AVLTree{
         void inorder(AVLNode *, ostream & out = cout) const;
         void postorder(AVLNode *, ostream & out = cout) const;
 
+        void balance(AVLNode * & t);
 };
 
 template <typename Comparable>
@@ -96,14 +97,33 @@ typename AVLTree<Comparable> :: AVLNode * AVLTree<Comparable> :: findMin(AVLNode
     return t;
 }
 
+template <typename Comparable>
+void AVLTree<Comparable> :: insert(const Comparable & x){
+    insert(x, root);
+}
 
 template <typename Comparable>
-bool AVLTree<Comparable> :: contains(const Comparable & key) const{
+void AVLTree<Comparable> :: insert(const Comparable & x, AVLNode * & t){
+    if (t == nullptr)
+        t = new AVLNode{x};
+    else if (x < t->element)
+        insert(x, t->left);
+    else if (x > t->element)
+        insert(x, t->right);
+    else
+    /* Do nothing if duplicate element occurs*/ ;
+
+    balance(t);
+
+}
+
+template <typename Comparable>
+bool AVLTree<Comparable> :: contains(const Comparable & key) const {
     return contains(key, root);
 }
 
 template <typename Comparable>
-bool AVLTree<Comparable> :: contains(const Comparable & key, AVLNode *t){
+bool AVLTree<Comparable> :: contains(const Comparable & key, AVLNode *t) const {
     if (t == nullptr)
         return false;
     else if (t->element > key)
