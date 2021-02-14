@@ -68,6 +68,22 @@ class AVLTree{
 
 };
 
+template <typename Comparable>
+bool AVLTree<Comparable> :: contains(const Comparable & key) const{
+    return contains(key, root);
+}
+
+template <typename Comparable>
+bool AVLTree<Comparable> :: contains(const Comparable & key, AVLNode *t){
+    if (t == nullptr)
+        return false;
+    else if (t->element > key)
+        return contains(key, t->left);
+    else if (t->element < key)
+        return contains(key, t->right);
+    else
+        return true;
+}
 
 
 int main()
