@@ -111,10 +111,31 @@ void AVLTree<Comparable> :: insert(const Comparable & x, AVLNode * & t){
     else if (x > t->element)
         insert(x, t->right);
     else
-    /* Do nothing if duplicate element occurs*/ ;
+    /* Do nothing if duplicate element occurs*/ 
+    ;
 
     balance(t);
 
+}
+
+template <typename Comparable>
+void AVLTree<Comparable> :: insert(Comparable && x){
+    insert(move(x), root);
+}
+
+template <typename Comparable>
+void AVLTree<Comparable> :: insert(Comparable && x, AVLNode * & t){
+    if (t == nullptr)
+        t = new AVLNode {move(x)};
+    else if (x < t->element)
+        insert(move(x), t->left);
+    else if (x > t->element)
+        insert(move(x), t->right);
+    else 
+    /* Do nothing if duplicate element occurs*/ 
+    ;
+
+    balance(t);      
 }
 
 template <typename Comparable>
