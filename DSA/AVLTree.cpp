@@ -69,6 +69,22 @@ class AVLTree{
 };
 
 template <typename Comparable>
+const Comparable & AVLTree<Comparable> :: findMax() const{
+    return findMax(root)->element;
+}
+
+template <typename Comparable>
+typename AVLTree<Comparable> :: AVLNode * AVLTree<Comparable> :: findMax(AVLNode * t) const{
+    if (t == nullptr)
+        return nullptr;
+    else if (t->right != nullptr)
+        return findMax(t->right);
+    else
+        return t;
+}
+
+
+template <typename Comparable>
 bool AVLTree<Comparable> :: contains(const Comparable & key) const{
     return contains(key, root);
 }
