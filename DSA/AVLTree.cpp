@@ -83,6 +83,19 @@ typename AVLTree<Comparable> :: AVLNode * AVLTree<Comparable> :: findMax(AVLNode
         return t;
 }
 
+template <typename Comparable>
+const Comparable & AVLTree<Comparable> :: findMin() const{
+    return findMin(root)->element;
+}
+
+template <typename Comparable>
+typename AVLTree<Comparable> :: AVLNode * AVLTree<Comparable> :: findMin(AVLNode *t) const{
+    if (t == nullptr)
+        while (t->left != nullptr)
+            t = t->left;
+    return t;
+}
+
 
 template <typename Comparable>
 bool AVLTree<Comparable> :: contains(const Comparable & key) const{
