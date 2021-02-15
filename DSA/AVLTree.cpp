@@ -25,8 +25,7 @@ class AVLTree{
         void insert(const Comparable &);
         void insert(Comparable &&);
         void remove(const Comparable &);
-        void getHeight() const;
-
+        
         void preorder(ostream & out = cout) const;
         void inorder(ostream & out = cout) const;
         void postorder(ostream & out = cout) const;
@@ -184,6 +183,11 @@ bool AVLTree<Comparable> :: contains(const Comparable & key, AVLNode *t) const {
 template <typename Comparable>
 bool AVLTree<Comparable> :: isEmpty() const{
     return root == nullptr;
+}
+
+template <typename Comparable>
+int AVLTree<Comparable> :: getHeight(AVLNode *t) const{
+    return t == nullptr ? -1 : t->height;
 }
 
 int main()
