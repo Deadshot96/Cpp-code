@@ -222,6 +222,33 @@ int AVLTree<Comparable> :: getHeight(AVLNode *t) const{
     return t == nullptr ? -1 : t->height;
 }
 
+template <typename Comparable>
+void AVLTree<Comparable> :: remove(const Comparable & key){
+    remove(key, root);
+}
+
+template <typename Comparable>
+void AVLTree<Comparable> :: remove(const Comparable & key, AVLNode * & t){
+    if (t == nullptr)
+        return;
+
+    if (key < t->element)
+        remove(key, t->left);
+    else if (key > t->element)
+        remove(key, t->right);
+    else if (t->left != nullptr && t->right != nullptr){
+        t->element = findMax(t->right)->element;
+        remove(t->element, t->right);   
+    }
+    else{
+        AVLNode *oldNode = t;
+        t = (t->left != nullptr) ? t->left : t->right;
+        delete oldNode;
+    }
+
+    balance(t);
+}
+
 int main()
 {
     cout << "Hello, World!\n";
