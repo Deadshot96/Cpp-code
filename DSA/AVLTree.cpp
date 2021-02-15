@@ -237,7 +237,7 @@ void AVLTree<Comparable> :: remove(const Comparable & key, AVLNode * & t){
     else if (key > t->element)
         remove(key, t->right);
     else if (t->left != nullptr && t->right != nullptr){
-        t->element = findMax(t->right)->element;
+        t->element = findMin(t->right)->element;
         remove(t->element, t->right);   
     }
     else{
@@ -247,6 +247,21 @@ void AVLTree<Comparable> :: remove(const Comparable & key, AVLNode * & t){
     }
 
     balance(t);
+}
+
+template <typename Comparable>
+void AVLTree<Comparable> :: preorder(ostream & out) const{
+    out << "Preorder Traversal: " <<endl;
+    preorder(root, out);
+}
+
+template <typename Comparable>
+void AVLTree<Comparable> :: preorder(AVLNode * t, ostream & out) const{
+    if (t != nullptr){
+        out << t->element;
+        preorder(t->left);
+        preorder(t->right);
+    }
 }
 
 int main()
