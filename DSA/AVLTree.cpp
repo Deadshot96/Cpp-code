@@ -170,6 +170,12 @@ void AVLTree<Comparable> :: doubleWithLeftChild(AVLNode * & k3){
 }
 
 template <typename Comparable>
+void AVLTree<Comparable> :: doubleWithRightChild(AVLNode * & k3){
+    rotateWithLeftChild(k3->right);
+    rotateWithRightChild(k3);
+}
+
+template <typename Comparable>
 void AVLTree<Comparable> :: insert(Comparable && x){
     insert(move(x), root);
 }
