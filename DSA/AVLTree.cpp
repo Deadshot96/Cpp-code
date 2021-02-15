@@ -267,7 +267,7 @@ void AVLTree<Comparable> :: preorder(AVLNode * t, ostream & out) const{
 template <typename Comparable>
 void AVLTree<Comparable> :: inorder(ostream & out) const{
     out << "Inorder Traversal: " <<endl;
-    preorder(root, out);
+    inorder(root, out);
 }
 
 template <typename Comparable>
@@ -276,6 +276,21 @@ void AVLTree<Comparable> :: inorder(AVLNode * t, ostream & out) const{
         inorder(t->left);
         out << t->element;
         inorder(t->right);
+    }
+}
+
+template <typename Comparable>
+void AVLTree<Comparable> :: postorder(ostream & out) const{
+    out << "Postorder Traversal: " <<endl;
+    postorder(root, out);
+}
+
+template <typename Comparable>
+void AVLTree<Comparable> :: postorder(AVLNode * t, ostream & out) const{
+    if (t != nullptr){
+        postorder(t->left);
+        postorder(t->right);
+        out << t->element;
     }
 }
 
