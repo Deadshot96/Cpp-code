@@ -50,6 +50,7 @@ class AVLTree{
 
         // Data
         AVLNode *root;
+        static const int ALLOWED_IMBALANCE = 1;
 
         int getHeight(AVLNode *) const;
         void insert(const Comparable &, AVLNode * &);
@@ -66,7 +67,11 @@ class AVLTree{
         void inorder(AVLNode *, ostream & out = cout) const;
         void postorder(AVLNode *, ostream & out = cout) const;
 
-        void balance(AVLNode * & t);
+        void balance(AVLNode * &);
+        void rotateWithLeftChild(AVLNode * &);
+        void rotateWithRightChild(AVLNode * &);
+        void doubleWithLeftChild(AVLNode * &);
+        void doubleWithRightChild(AVLNode * &);
 };
 
 template <typename Comparable>
@@ -119,6 +124,27 @@ void AVLTree<Comparable> :: insert(const Comparable & x, AVLNode * & t){
 }
 
 template <typename Comparable>
+void AVLTree<Comparable> :: balance(AVLNode * & t){
+    if (t == nullptr)
+        return;
+
+    if ((getHeight(t->left) - getHeight(t->right)) > ALLOWED_IMBALANCE){
+        if (getHeight(t->left->left) >= getHeight(t->left->right))
+            rotateWithLeftChild(t);
+        else
+            doubleWithLeftChild(t);
+    }
+    else if ((getHeight(t->right) - getHeight(t->left)) > ALLOWED_IMBALANCE){
+        if (getHeight(t->right->right) >= getHeight(t->right->left))
+            rotateWithRightChild(t);
+        else
+            doubleWithRightChild(t);
+    }
+
+    t->height = 1 + max(getHeight(t->left), getHeight(t->right));
+}
+
+template <typename Comparable>
 void AVLTree<Comparable> :: insert(Comparable && x){
     insert(move(x), root);
 }
@@ -155,6 +181,10 @@ bool AVLTree<Comparable> :: contains(const Comparable & key, AVLNode *t) const {
         return true;
 }
 
+template <typename Comparable>
+bool AVLTree<Comparable> :: isEmpty() const{
+    return root == nullptr;
+}
 
 int main()
 {
