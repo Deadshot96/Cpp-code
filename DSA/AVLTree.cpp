@@ -148,8 +148,18 @@ void AVLTree<Comparable> :: rotateWithLeftChild(AVLNode * & k2){
     AVLNode *k1 = k2->left;
     k2->left = k1->right;
     k1->right = k2;
-    k2->height = max(getHeight(k2->left), getHeight(k2->right)) + 1
+    k2->height = max(getHeight(k2->left), getHeight(k2->right)) + 1;
     k1->height = max(getHeight(k1->left), k2->height) + 1;
+    k2 = k1;
+}
+
+template <typename Comparable>
+void AVLTree<Comparable> :: rotateWithRightChild(AVLNode * & k2){
+    AVLNode *k1 = k2->right;
+    k2->right = k1->left;
+    k1->left = k2;
+    k2->height = max(getHeight(k2->left), getHeight(k2->right)) + 1;
+    k1->height = max(getHeight(k1->right), k2->height) + 1;
     k2 = k1;
 }
 
