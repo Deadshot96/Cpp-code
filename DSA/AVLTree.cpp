@@ -264,6 +264,21 @@ void AVLTree<Comparable> :: preorder(AVLNode * t, ostream & out) const{
     }
 }
 
+template <typename Comparable>
+void AVLTree<Comparable> :: inorder(ostream & out) const{
+    out << "Inorder Traversal: " <<endl;
+    preorder(root, out);
+}
+
+template <typename Comparable>
+void AVLTree<Comparable> :: inorder(AVLNode * t, ostream & out) const{
+    if (t != nullptr){
+        inorder(t->left);
+        out << t->element;
+        inorder(t->right);
+    }
+}
+
 int main()
 {
     cout << "Hello, World!\n";
