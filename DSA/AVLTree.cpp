@@ -332,6 +332,11 @@ AVLTree<Comparable> :: AVLTree(const AVLTree & rhs){
     root = clone(rhs.root);
 }
 
+template <typename Comparable>
+AVLTree<Comparable> :: AVLTree(const AVLTree && rhs): root{rhs.root}{
+    rhs = nullptr;
+}
+
 int main()
 {
     cout << "Hello, World!\n";
