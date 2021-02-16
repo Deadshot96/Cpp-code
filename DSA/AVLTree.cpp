@@ -39,12 +39,13 @@ class AVLTree{
             Comparable element;
             AVLNode *left;
             AVLNode *right;
+            int height;
 
-            AVLNode(const Comparable & theElement, AVLNode *lt = nullptr, AVLNode *rt = nullptr)
-                : element{theElement}, left{lt}, right{rt}{}
+            AVLNode(const Comparable & theElement, AVLNode *lt = nullptr, AVLNode *rt = nullptr, int ht = 0)
+                : element{theElement}, left{lt}, right{rt}, height{ht} {}
             
-            AVLNode(const Comparable && theElement, AVLNode *lt = nullptr, AVLNode *rt = nullptr)
-                : element{theElement}, left{lt}, right{rt}{}
+            AVLNode(const Comparable && theElement, AVLNode *lt = nullptr, AVLNode *rt = nullptr, int ht = 0)
+                : element{theElement}, left{lt}, right{rt}, height{ht} {}
         };
 
         // Data
@@ -363,5 +364,14 @@ void AVLTree<Comparable> :: printTree(ostream & out) const{
 int main()
 {
     cout << "Hello, World!\n";
+
+    AVLTree<int> t;
+
+    t.insert(3);
+    t.insert(2);
+    t.insert(1);
+
+
+
     return 0;
 }
