@@ -317,7 +317,7 @@ void AVLTree<Comparable> :: makeEmpty(AVLNode * & t){
 template <typename Comparable>
 typename AVLTree<Comparable> :: AVLNode * AVLTree<Comparable> :: clone(AVLNode *t) const{
     if (t == nullptr)
-        return nullptr
+        return nullptr;
     else
         return new AVLNode{t->element, clone(t->left), clone(t->right)};
 }
@@ -349,6 +349,15 @@ AVLTree<Comparable> & AVLTree<Comparable> :: operator= (AVLTree && rhs){
     swap(root, rhs.root);
     rhs.root = nullptr;
     return *this;
+}
+
+template <typename Comparable>
+void AVLTree<Comparable> :: printTree(ostream & out) const{
+    if (isEmpty())
+        out << "Empty Tree" <<endl;
+    else
+        printTree(root, out);
+
 }
 
 int main()
