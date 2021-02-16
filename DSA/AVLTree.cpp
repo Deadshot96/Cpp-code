@@ -299,6 +299,21 @@ AVLTree<Comparable> :: ~AVLTree(){
     makeEmpty();
 }
 
+template <typename Comparable>
+void AVLTree<Comparable> :: makeEmpty(){
+    makeEmpty(root);
+}
+
+template <typename Comparable>
+void AVLTree<Comparable> :: makeEmpty(AVLNode * & t){
+    if (t != nullptr){
+        makeEmpty(t->left);
+        makeEmpty(t->right);
+        delete t;
+    }
+    t = nullptr;
+}
+
 int main()
 {
     cout << "Hello, World!\n";
