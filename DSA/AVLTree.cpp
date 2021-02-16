@@ -322,6 +322,11 @@ typename AVLTree<Comparable> :: AVLNode * AVLTree<Comparable> :: clone(AVLNode *
         return new AVLNode{t->element, clone(t->left), clone(t->right)};
 }
 
+template <typename Comparable>
+AVLTree<Comparable> :: AVLTree(){
+    root = nullptr;
+}
+
 int main()
 {
     cout << "Hello, World!\n";
