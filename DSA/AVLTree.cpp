@@ -337,6 +337,20 @@ AVLTree<Comparable> :: AVLTree(const AVLTree && rhs): root{rhs.root}{
     rhs = nullptr;
 }
 
+template <typename Comparable>
+AVLTree<Comparable> & AVLTree<Comparable> :: operator= (const AVLTree & rhs){
+    if (this != &rhs)
+        root = clone(rhs.root);
+    return *root;   
+}
+
+template <typename Comparable>
+AVLTree<Comparable> & AVLTree<Comparable> :: operator= (AVLTree && rhs){
+    swap(root, rhs.root);
+    rhs.root = nullptr;
+    return *this;
+}
+
 int main()
 {
     cout << "Hello, World!\n";
