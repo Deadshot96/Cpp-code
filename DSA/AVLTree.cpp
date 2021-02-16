@@ -259,7 +259,7 @@ void AVLTree<Comparable> :: preorder(ostream & out) const{
 template <typename Comparable>
 void AVLTree<Comparable> :: preorder(AVLNode * t, ostream & out) const{
     if (t != nullptr){
-        out << t->element;
+        out << t->element << "\t";
         preorder(t->left);
         preorder(t->right);
     }
@@ -275,7 +275,7 @@ template <typename Comparable>
 void AVLTree<Comparable> :: inorder(AVLNode * t, ostream & out) const{
     if (t != nullptr){
         inorder(t->left);
-        out << t->element;
+        out << t->element << "\t";
         inorder(t->right);
     }
 }
@@ -291,7 +291,7 @@ void AVLTree<Comparable> :: postorder(AVLNode * t, ostream & out) const{
     if (t != nullptr){
         postorder(t->left);
         postorder(t->right);
-        out << t->element;
+        out << t->element << "\t";
     }
 }
 
@@ -361,6 +361,15 @@ void AVLTree<Comparable> :: printTree(ostream & out) const{
 
 }
 
+template <typename Comparable>
+void AVLTree<Comparable> :: printTree(AVLNode *t, ostream & out) const{
+    if (t != nullptr){
+        printTree(t->left, out);
+        out << t->element << endl;
+        printTree(t->right, out);
+    }
+}
+
 int main()
 {
     cout << "Hello, World!\n";
@@ -371,6 +380,16 @@ int main()
     t.insert(2);
     t.insert(1);
 
+    for (int i = 4; i < 8; i++)
+        t.insert(i);
+
+    for (int i = 16; i > 9; i--)
+        t.insert(i);
+
+    t.insert(8);
+    t.insert(9);
+
+    t.inorder();
 
 
     return 0;
