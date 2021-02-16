@@ -314,6 +314,14 @@ void AVLTree<Comparable> :: makeEmpty(AVLNode * & t){
     t = nullptr;
 }
 
+template <typename Comparable>
+typename AVLTree<Comparable> :: AVLNode * AVLTree<Comparable> :: clone(AVLNode *t) const{
+    if (t == nullptr)
+        return nullptr
+    else
+        return new AVLNode{t->element, clone(t->left), clone(t->right)};
+}
+
 int main()
 {
     cout << "Hello, World!\n";
