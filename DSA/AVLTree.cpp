@@ -294,6 +294,11 @@ void AVLTree<Comparable> :: postorder(AVLNode * t, ostream & out) const{
     }
 }
 
+template <typename Comparable>
+AVLTree<Comparable> :: ~AVLTree(){
+    makeEmpty();
+}
+
 int main()
 {
     cout << "Hello, World!\n";
