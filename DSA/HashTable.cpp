@@ -8,21 +8,6 @@ using namespace std;
     (operator== or operator!=, or possibly both).
 */
 
-template <>
-class hash<string>
-{
-    public:
-        size_t operator() (const string & key){
-            size_t hashVal = 0;
-            for(char ch: key)
-                hashVal = 37 * hashVal + ch;
-
-            return hashVal;
-        }
-}
-
-
-
 template <typename HashedObj>
 class HashTable{
     public:
@@ -40,6 +25,12 @@ class HashTable{
         void rehash();
         size_t myhash(const HashedObj &) const;
 };
+
+template <typename HashedObj>
+void HashTable<HashedObj> :: makeEmpty(){
+    for (auto & thisList: theLists)
+        thisList.clear();
+}
 
 int main()
 {
