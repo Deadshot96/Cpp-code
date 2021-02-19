@@ -32,6 +32,12 @@ void HashTable<HashedObj> :: makeEmpty(){
         thisList.clear();
 }
 
+template <typename HashedObj>
+bool HashedTable<HashedObj> :: contains (const HashedObj & x) const{
+    auto & whichList = theLists[myhash(x)];
+    return find(begin(whichList), end(whichList), x) != end(whichList);
+}
+
 int main()
 {
     cout << "Hello, World!" << endl;
