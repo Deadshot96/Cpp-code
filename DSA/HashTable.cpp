@@ -38,6 +38,19 @@ bool HashedTable<HashedObj> :: contains (const HashedObj & x) const{
     return find(begin(whichList), end(whichList), x) != end(whichList);
 }
 
+template <typename HashedObj>
+bool HashedTable<HashedObj> :: remove (const HashedObj & x){
+    auto & whichList = theLists[myhash(x)];
+    auto itr = find(begin(whichList), end(whichList), x);
+
+    if (itr == end(whichList))
+        return false;
+
+    whichList.erase(itr);
+    currentSize--;
+    return true;
+}
+
 int main()
 {
     cout << "Hello, World!" << endl;
