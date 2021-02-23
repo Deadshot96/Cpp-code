@@ -33,13 +33,13 @@ void HashTable<HashedObj> :: makeEmpty(){
 }
 
 template <typename HashedObj>
-bool HashedTable<HashedObj> :: contains (const HashedObj & x) const{
+bool HashTable<HashedObj> :: contains (const HashedObj & x) const{
     auto & whichList = theLists[myhash(x)];
     return find(begin(whichList), end(whichList), x) != end(whichList);
 }
 
 template <typename HashedObj>
-bool HashedTable<HashedObj> :: remove (const HashedObj & x){
+bool HashTable<HashedObj> :: remove (const HashedObj & x){
     auto & whichList = theLists[myhash(x)];
     auto itr = find(begin(whichList), end(whichList), x);
 
@@ -52,7 +52,7 @@ bool HashedTable<HashedObj> :: remove (const HashedObj & x){
 }
 
 template <typename HashedObj>
-void HashedTable<HashedObj> :: insert (const HashedObj & x){
+bool HashTable<HashedObj> :: insert (const HashedObj & x){
     auto & whichList = theLists[myhash(x)];
 
     if (find(begin(whichList), end(whichList), x) != end(whichList))
