@@ -67,6 +67,22 @@ bool HashTable<HashedObj> :: insert (const HashedObj & x){
     return true;
 }
 
+template <typename HashedObj>
+bool HashTable<HashedObj> :: insert(HashedObj && x){
+    auto & whichList = theLists[myhash(x)];
+
+    if (find(begin(whichList), end(whichList), x) != end(whichList))
+        return false;
+
+    whichList.push_back(move(x));
+    currentSize++;
+
+    if (currentSize > theLists.size())
+        rehash();
+    
+    return true;
+}
+
 int main()
 {
     cout << "Hello, World!" << endl;
