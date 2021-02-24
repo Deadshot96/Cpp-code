@@ -83,6 +83,20 @@ bool HashTable<HashedObj> :: insert(HashedObj && x){
     return true;
 }
 
+template <typename HashedObj>
+void HashTable<HashedObj> :: rehash(){
+    vector<list<HashedObj>> oldLists = theLists;
+
+    theLists.resize(2 * oldLists.size());
+    for(auto & theList: theLists)
+        theList.clear();
+
+    currentSize = 0;
+    for (auto & theList: oldLists)
+        for (auto & x: theList)
+            insert(move(x));
+}
+
 int main()
 {
     cout << "Hello, World!" << endl;
