@@ -94,6 +94,22 @@ bool HashTable<HashedObj> :: insert(const HashedObj & x){
     return true;
 }
 
+template <typename HashedObj>
+bool HashTable<HashedObj> :: insert(HashedObj && x){
+    int currentPos = findPos(move(x));
+
+    if (isActive(currentPos))
+        return false;
+
+    array[currentPos].element = move(x);
+    array[currentPos].info = ACTIVE
+
+    if (++currentSize > array.size() / 2)
+        rehash();
+
+    return true;
+}
+
 int main()
 {
     cout << "Hello, World!" << endl;
