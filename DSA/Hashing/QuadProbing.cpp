@@ -102,11 +102,21 @@ bool HashTable<HashedObj> :: insert(HashedObj && x){
         return false;
 
     array[currentPos].element = move(x);
-    array[currentPos].info = ACTIVE
+    array[currentPos].info = ACTIVE;
 
     if (++currentSize > array.size() / 2)
         rehash();
 
+    return true;
+}
+
+template <typename HashedObj>
+bool HashTable<HashedObj> :: remove(const HashedObj & x){
+    int currentPos = findPos(x);
+    if (!isActive(currentPos))
+        return false;
+
+    array[currentPos].info = DELETED;
     return true;
 }
 
