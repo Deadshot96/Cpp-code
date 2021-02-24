@@ -56,6 +56,11 @@ bool HashTable<HashedObj> :: contains (const HashedObj & x) const{
     return isActive(findPos(x));
 }
 
+template <typename HashedObj>
+bool HashTable<HashedObj> :: isActive(int currentPos) const{
+    return array[currentPos].info == ACTIVE;
+}
+
 int main()
 {
     cout << "Hello, World!" << endl;
