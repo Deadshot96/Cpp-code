@@ -121,6 +121,22 @@ bool HashTable<HashedObj> :: remove(const HashedObj & x){
     return true;
 }
 
+template <typename HashedObj>
+void HashTable<HashedObj> :: rehash(){
+    vector<HashEntry> oldArray = array;
+
+    array.resize(nextPrime(2 * oldArray.size()));
+    for (auto & entry: array)
+        entry.info = EMPTY;
+
+    currentSize = 0;
+    for (auto & entry: oldArray)
+        if (entry.info == ACTIVE)
+            insert(move(entry.element));
+    
+    
+}
+
 int main()
 {
     cout << "Hello, World!" << endl;
