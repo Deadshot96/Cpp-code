@@ -61,6 +61,24 @@ bool HashTable<HashedObj> :: isActive(int currentPos) const{
     return array[currentPos].info == ACTIVE;
 }
 
+template <typename HashedObj>
+int HashTable<HashedObj> :: findPos(const HashedObj & x) const{
+    int offset = 1;
+    int currentPos = myhash(x);
+
+    while (array[currentPos].info != EMPTY &&
+        array[currentPos].element != x){
+        currentPos += offset;
+        offset += 2;
+
+        if (currentPos >= array.size())
+            currentPos -= array.size();
+    }
+
+    return currentPos;
+
+}
+
 int main()
 {
     cout << "Hello, World!" << endl;
