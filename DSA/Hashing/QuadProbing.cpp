@@ -44,6 +44,13 @@ class HashTable{
         
 };
 
+template <typename HashedObj>
+void HashTable<HashedObj> :: makeEmpty(){
+    currentSize = 0;
+    for(auto & entry: array)
+        entry.info = EMPTY;
+}
+
 int main()
 {
     cout << "Hello, World!" << endl;
