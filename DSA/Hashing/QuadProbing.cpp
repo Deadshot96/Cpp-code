@@ -2,11 +2,14 @@
 # include <vector>
 using namespace std;
 
+int nextPrime(int);
+
 template <typename HashedObj>
 class HashTable{
 
     public:
-        explicit HashTable(int size = 101);
+        explicit HashTable(int size = 101)
+            :array(nextPrime(size)) {makeEmpty();}
 
         bool contains(const HashedObj &) const;
         void makeEmpty();
