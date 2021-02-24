@@ -86,7 +86,7 @@ bool HashTable<HashedObj> :: insert(const HashedObj & x){
         return false;
 
     array[currentPos].element = x;
-    array[currentPos].info = ACTIVE
+    array[currentPos].info = ACTIVE;
 
     if (++currentSize > array.size() / 2)
         rehash();
