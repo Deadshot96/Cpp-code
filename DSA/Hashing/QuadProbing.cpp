@@ -51,6 +51,11 @@ void HashTable<HashedObj> :: makeEmpty(){
         entry.info = EMPTY;
 }
 
+template <typename HashedObj>
+bool HashTable<HashedObj> :: contains (const HashedObj & x) const{
+    return isActive(findPos(x));
+}
+
 int main()
 {
     cout << "Hello, World!" << endl;
