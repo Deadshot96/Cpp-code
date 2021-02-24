@@ -16,7 +16,6 @@ class HashTable{
         bool insert(const HashedObj &);
         bool insert(HashedObj &&);
         bool remove(const HashedObj &);
-
         enum EntryType {ACTIVE, EMPTY, DELETED};
 
     private:
@@ -77,6 +76,22 @@ int HashTable<HashedObj> :: findPos(const HashedObj & x) const{
 
     return currentPos;
 
+}
+
+template <typename HashedObj>
+bool HashTable<HashedObj> :: insert(const HashedObj & x){
+    int currentPos = findPos(x);
+    
+    if (isActive(currentPos))
+        return false;
+
+    array[currentPos].element = x;
+    array[currentPos].info = ACTIVE
+
+    if (++currentSize > array.size() / 2)
+        rehash();
+
+    return true;
 }
 
 int main()
