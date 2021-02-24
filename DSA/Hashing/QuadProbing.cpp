@@ -18,20 +18,20 @@ class HashTable{
 
     private:
 
-        struct HashedEntry
+        struct HashEntry
         {
             HashedObj element;
             EntryType info;
 
-            HashedEntry(const HashedObj & x = HashedObj{}, EntryType i = EMPTY)
+            HashEntry(const HashedObj & x = HashedObj{}, EntryType i = EMPTY)
                 :element{x}, info{i} {};
 
-            HashedEntry(HashedObj && x, EntryType i = EMPTY)
+            HashEntry(HashedObj && x, EntryType i = EMPTY)
                 :element{move(x)}, info{i} {};
 
         };
 
-        vector<HashedEntry> array;
+        vector<HashEntry> array;
         int currentSize;
 
         bool isActive(int) const;
