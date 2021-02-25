@@ -214,6 +214,10 @@ bool CuckooHashTable<AnyType, HashFamily> :: insertHelper(AnyType && x){
     }
 }
 
+template <typename AnyType, typename HashFamily>
+void CuckooHashTable<AnyType, HashFamily> :: expand(){
+    rehash(static_cast<int>(array.size() / MAX_LOAD));
+}
 
 bool isPrime(int n){
     if (n <= 1) return false;
