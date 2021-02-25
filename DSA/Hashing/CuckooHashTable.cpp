@@ -67,6 +67,11 @@ void CuckooHashTable<AnyType, HashFamily> :: makeEmpty(){
 }
 
 
+template <typename AnyType, typename HashFamily>
+size_t CuckooHashTable<AnyType, HashFamily> :: myhash(const AnyType & x, int which) const {
+
+}
+
 bool isPrime(int n){
     if (n <= 1) return false;
     if (n <= 3) return true;
