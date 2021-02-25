@@ -219,6 +219,24 @@ void CuckooHashTable<AnyType, HashFamily> :: expand(){
     rehash(static_cast<int>(array.size() / MAX_LOAD));
 }
 
+template <typename AnyType, typename HashFamily>
+void CuckooHashTable<AnyType, HashFamily> :: rehash(int newSize){
+    vector<HashEntry> oldArray = array;
+
+    array.resize(nextPrime(newSize));
+
+    for (auto & entry : array)
+    {
+        entry.isActive = false;
+    }
+
+    currentSize = 0;
+    for (auto & entry: oldArray)
+        if (entry.isActive)
+            inset(move(entry.element));
+    
+}
+
 bool isPrime(int n){
     if (n <= 1) return false;
     if (n <= 3) return true;
