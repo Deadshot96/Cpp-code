@@ -88,6 +88,18 @@ bool CuckooHashTable<AnyType, HashFamily> :: contains(const AnyType & x) const{
     return findPos(x) != -1;
 }
 
+template <typename AnyType, typename HashFamily>
+bool CuckooHashTable<AnyType, HashFamily> :: remove(const AnyType & x){
+    int currentPos = findPos(x);
+
+    if (!isActive(currentPos))
+        return false;
+
+    array[currentPos].isActive = false;
+    --currentSize;
+    return true;
+}
+
 bool isPrime(int n){
     if (n <= 1) return false;
     if (n <= 3) return true;
