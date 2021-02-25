@@ -38,6 +38,11 @@ class BinaryHeap{
 
 };
 
+template <typename Comparable>
+bool BinaryHeap<Comparable> :: isEmpty() const{
+    return currentSize == 0;
+}
+
 int main()
 {
     cout << "Hellom World!" <<endl;
