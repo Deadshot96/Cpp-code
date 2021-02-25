@@ -69,7 +69,18 @@ void CuckooHashTable<AnyType, HashFamily> :: makeEmpty(){
 
 template <typename AnyType, typename HashFamily>
 size_t CuckooHashTable<AnyType, HashFamily> :: myhash(const AnyType & x, int which) const {
+    return hashFunctions.hash(x, which) % array.size();
+}
 
+template <typename AnyType, typename HashFamily>
+int CuckooHashTable<AnyType, HashFamily> :: findPos(const AnyType & x) const{
+    for (int i = 0; i < numHashFunctions; ++i){
+        int pos = myhash(x, i);
+
+        if (isActive(pos) && array[pos].element == x)
+            return pos;
+    }
+    return -1;
 }
 
 bool isPrime(int n){
