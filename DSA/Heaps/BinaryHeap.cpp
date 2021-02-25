@@ -123,6 +123,17 @@ void BinaryHeap<Comparable> :: percolateDown(int hole){
     array[hole] = tmp;
 }
 
+template <typename Comparable>
+void BinaryHeap<Comparable> :: percolateUp(int hole){
+    array[0] = move(array[hole]); // this steps ensures that the following loop terminates at hole = 1
+
+    for(; array[hole] < array[hole / 2]; hole /= 2)
+        array[hole] = move(array[hole / 2]);
+
+    array[hole] = move(array[0]);
+
+}
+
 int main()
 {
     cout << "Hellom World!" <<endl;
