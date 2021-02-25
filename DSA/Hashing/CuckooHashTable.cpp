@@ -126,8 +126,53 @@ bool CuckooHashTable<AnyType, HashFamily> :: insert(AnyType && x){
 template <typename AnyType, typename HashFamily>
 bool CuckooHashTable<AnyType, HashFamily> :: insertHelper(const AnyType & x){
     const int COUNT_LIMIT = 100;
-    AnyType x = xx;
 
+    while (true){
+        int lastPos = -1;
+        int pos;
+
+        for (int i = 0; i < COUNT_LIMIT; i++)
+        {
+            
+            for (int i = 0; i < numHashFunctions; i++)
+            {
+                pos = myhash(x, i);
+
+                if (!isActive(pos)){
+                    array[pos] = move(HashEntry(move(x), true));
+                    ++currentSize;
+                    return true;
+                }
+            }
+
+            int i = 0;
+
+            do
+            {
+                pos = myhash(x, r.nextInt(numHashFunctions));
+            } while (pos == lastPos && i++ < 5);
+            
+            lastPos = pos;
+            swap(x, array[pos].element);
+
+        }
+
+        if(++rehashes > ALLOWED_REHASH){
+            expand();
+            rehashes = 0;
+        }
+        else{
+            rehash();
+        }
+        
+    }
+}
+
+
+template <typename AnyType, typename HashFamily>
+bool CuckooHashTable<AnyType, HashFamily> :: insertHelper(AnyType && x){
+    const int COUNT_LIMIT = 100;
+    
     while (true){
         int lastPos = -1;
         int pos;
