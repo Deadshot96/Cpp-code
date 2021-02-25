@@ -145,6 +145,14 @@ int BinaryHeap<Comparable> :: getSize() const{
     return currentSize;
 }
 
+template <typename Comparable>
+void BinaryHeap<Comparable> :: buildHeap(){
+    for (int i = currentSize / 2; i > 0; i--)
+    {
+        percolateDown(i);
+    }
+}
+
 int main()
 {
     cout << "Hello, World!" <<endl;
