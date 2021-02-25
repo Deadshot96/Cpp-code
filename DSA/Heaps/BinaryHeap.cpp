@@ -5,8 +5,19 @@ using namespace std;
 template <typename Comparable>
 class BinaryHeap{
     public:
-        explicit BinaryHeap(int capacity = 100);
-        explicit BinaryHeap(const vector<Comparable> & items);
+        explicit BinaryHeap(int capacity = 100): array(capacity) {
+            currentSize = 0;
+        }
+        explicit BinaryHeap(const vector<Comparable> & items)
+            : array(items.size() + 10), currentSize{items.size()}
+        {
+            for (int i = 0; i < items.size(); i++)
+            {
+                array[i + 1] = items[i];
+            }
+
+            buildHeap();
+        }
 
         bool isEmpty() const;
         const Comparable & findMin() const;
