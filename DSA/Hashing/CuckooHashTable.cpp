@@ -100,6 +100,17 @@ bool CuckooHashTable<AnyType, HashFamily> :: remove(const AnyType & x){
     return true;
 }
 
+template <typename AnyType, typename HashFamily>
+bool CuckooHashTable<AnyType, HashFamily> :: insert(const AnyType & x){
+    if (contains(x))
+        return false;
+
+    if (currentSize >= array.size() * MAX_LOAD)
+        expand();
+
+    return insertHelper(x);
+}
+
 bool isPrime(int n){
     if (n <= 1) return false;
     if (n <= 3) return true;
