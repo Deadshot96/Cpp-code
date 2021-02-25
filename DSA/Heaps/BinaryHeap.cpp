@@ -104,6 +104,24 @@ void BinaryHeap<Comparable> :: makeEmpty(){
     currentSize = 0;
 }
 
+template <typename Comparable>
+void BinaryHeap<Comparable> :: percolateDown(int hole){
+    int child;
+    Comparable tmp = move(array[hole]);
+
+    for(; hole * 2 <= currentSize; hole = child){
+        child = hole * 2;
+
+        if (child != currentSize && array[child + 1] < array[child])
+            child++;
+        
+        if (array[child] < tmp)
+            array[hole] = move(array[child]);
+        else
+            break;
+    }
+    array[hole] = tmp;
+}
 
 int main()
 {
