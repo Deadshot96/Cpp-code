@@ -77,6 +77,16 @@ void BinaryHeap<Comparable> :: insert(Comparable && x){
 
 }
 
+template <typename Comparable>
+void BinaryHeap<Comparable> :: deleteMin(){
+    if (isEmpty())
+        cout << "Underflow" << endl;
+
+    array[1] = move(array[currentSize--]);
+    percolateDown(1);
+
+}
+
 
 int main()
 {
