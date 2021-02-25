@@ -220,6 +220,11 @@ void CuckooHashTable<AnyType, HashFamily> :: expand(){
 }
 
 template <typename AnyType, typename HashFamily>
+void CuckooHashTable<AnyType, HashFamily> :: rehash(){
+    rehash(nextPrime(array.size() * 2));
+}
+
+template <typename AnyType, typename HashFamily>
 void CuckooHashTable<AnyType, HashFamily> :: rehash(int newSize){
     vector<HashEntry> oldArray = array;
 
