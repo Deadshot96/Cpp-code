@@ -25,7 +25,7 @@ class BinaryHeap{
         void insert(const Comparable &);
         void insert(Comparable &&);
         void deleteMin();
-        void deleteMin(const Comparable &);
+        void deleteMin(Comparable &);
         void makeEmpty();
 
     private:
@@ -82,6 +82,17 @@ void BinaryHeap<Comparable> :: deleteMin(){
     if (isEmpty())
         cout << "Underflow" << endl;
 
+    array[1] = move(array[currentSize--]);
+    percolateDown(1);
+
+}
+
+template <typename Comparable>
+void BinaryHeap<Comparable> :: deleteMin(Comparable & x){
+    if (isEmpty())
+        cout << "Underflow" << endl;
+
+    x = move(array[1]);
     array[1] = move(array[currentSize--]);
     percolateDown(1);
 
