@@ -27,6 +27,7 @@ class BinaryHeap{
         void deleteMin();
         void deleteMin(Comparable &);
         void makeEmpty();
+        int getSize() const;
 
     private:
         int currentSize;
@@ -139,6 +140,11 @@ const Comparable & BinaryHeap<Comparable> :: findMin() const{
     return array[1];
 }
 
+template <typename Comparable>
+int BinaryHeap<Comparable> :: getSize() const{
+    return currentSize;
+}
+
 int main()
 {
     cout << "Hello, World!" <<endl;
@@ -150,6 +156,9 @@ int main()
     int i = 12;
     pq.insert(i);
 
+    pq.deleteMin();
+
     cout << "Min is: " << pq.findMin() << endl;
+    cout << "Size is: " << pq.getSize() << endl;
     return 0;
 }
