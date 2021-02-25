@@ -1,5 +1,6 @@
 # include <iostream>
 # include <vector>
+# include <string>
 using namespace std;
 
 int nextPrime(int);
@@ -43,6 +44,12 @@ class HashTable{
         size_t myhash(const HashedObj &) const;
         
 };
+
+template <typename HashedObj>
+size_t HashTable<HashedObj> :: myhash(const HashedObj & x) const{
+    static hash<HashedObj> hf;
+    return hf(x) % array.size();
+}
 
 template <typename HashedObj>
 void HashTable<HashedObj> :: makeEmpty(){
