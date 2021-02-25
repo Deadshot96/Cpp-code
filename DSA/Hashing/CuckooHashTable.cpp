@@ -9,7 +9,11 @@ class CuckooHashTable{
 
     public:
 
-        explicit CuckooHashTable(int size = 101);
+        explicit CuckooHashTable(int size = 101) : array(nextPrime(size)){
+            numHashFunctions = hashFunctions.getNumberOfFunctions();
+            rehashes = 0;
+            makeEmpty();
+        }
 
         void makeEmpty();
         bool contains(const AnyType &) const;
@@ -46,7 +50,7 @@ class CuckooHashTable{
         static constexpr double MAX_LOAD = 0.40;
         static const int ALLOWED_REHASH = 5;
 
-        vector<HashEntry> arrray;
+        vector<HashEntry> array;
         int currentSize;
         int numHashFunctions;
         int rehashes;
