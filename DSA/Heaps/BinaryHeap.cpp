@@ -98,6 +98,12 @@ void BinaryHeap<Comparable> :: deleteMin(Comparable & x){
 
 }
 
+template <typename Comparable>
+void BinaryHeap<Comparable> :: makeEmpty(){
+    array.clear();
+    currentSize = 0;
+}
+
 
 int main()
 {
