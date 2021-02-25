@@ -83,6 +83,11 @@ int CuckooHashTable<AnyType, HashFamily> :: findPos(const AnyType & x) const{
     return -1;
 }
 
+template <typename AnyType, typename HashFamily>
+bool CuckooHashTable<AnyType, HashFamily> :: contains(const AnyType & x) const{
+    return findPos(x) != -1;
+}
+
 bool isPrime(int n){
     if (n <= 1) return false;
     if (n <= 3) return true;
