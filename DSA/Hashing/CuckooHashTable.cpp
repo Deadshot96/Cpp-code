@@ -59,6 +59,13 @@ class CuckooHashTable{
 
 };
 
+template <typename AnyType, typename HashFamily>
+void CuckooHashTable<AnyType, HashFamily> :: makeEmpty(){
+    currentSize = 0;
+    for (auto & entry: array)
+        entry.isActive = false;
+}
+
 
 bool isPrime(int n){
     if (n <= 1) return false;
