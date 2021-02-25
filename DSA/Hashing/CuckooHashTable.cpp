@@ -2,6 +2,8 @@
 # include <vector>
 using namespace std;
 
+bool isPrime(int);
+int nextPrime(int);
 template <typename AnyType, typename HashFamily>
 class CuckooHashTable{
 
