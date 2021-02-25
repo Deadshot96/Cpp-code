@@ -27,6 +27,13 @@ class HashTable{
 };
 
 template <typename HashedObj>
+size_t HashTable<HashedObj> :: myhash(const HashedObj & x) const{
+    static hash<HashedObj> hf;
+    return hf(x) % theLists.size();
+}
+
+
+template <typename HashedObj>
 void HashTable<HashedObj> :: makeEmpty(){
     for (auto & thisList: theLists)
         thisList.clear();
