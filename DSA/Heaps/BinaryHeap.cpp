@@ -45,7 +45,7 @@ bool BinaryHeap<Comparable> :: isEmpty() const{
 
 template <typename Comparable>
 void BinaryHeap<Comparable> :: insert(const Comparable & x){
-    if (currentSize >= array.size() - 1)
+    if (currentSize == array.size() - 1)
         array.resize(array.size() * 2);
 
     int hole = ++currentSize;
@@ -62,7 +62,7 @@ void BinaryHeap<Comparable> :: insert(const Comparable & x){
 
 template <typename Comparable>
 void BinaryHeap<Comparable> :: insert(Comparable && x){
-    if (currentSize >= array.size() - 1)
+    if (currentSize == array.size() - 1)
         array.resize(array.size() * 2);
 
     int hole = ++currentSize;
@@ -149,5 +149,7 @@ int main()
     pq.insert(1);
     int i = 12;
     pq.insert(i);
+
+    cout << "Min is: " << pq.findMin() << endl;
     return 0;
 }
