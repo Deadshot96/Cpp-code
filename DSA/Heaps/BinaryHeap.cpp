@@ -43,6 +43,23 @@ bool BinaryHeap<Comparable> :: isEmpty() const{
     return currentSize == 0;
 }
 
+template <typename Comparable>
+void BinaryHeap<Comparable> :: insert(const Comparable & x){
+    if (currentSize == array.size() - 1)
+        array.resize(array.size() * 2);
+
+    int hole = ++currentSize;
+
+    Comparable copy = x;
+    array[0] = move(copy); // this steps ensures that the following loop terminates at hole = 1
+
+    for(; x < array[hole / 2]; hole /= 2)
+        array[hole] = move(array[hole / 2]);
+
+    array[hole] = move(array[0]);
+
+}
+
 int main()
 {
     cout << "Hellom World!" <<endl;
