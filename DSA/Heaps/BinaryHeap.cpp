@@ -134,6 +134,11 @@ void BinaryHeap<Comparable> :: percolateUp(int hole){
 
 }
 
+template <typename Comparable>
+const Comparable & BinaryHeap<Comparable> :: findMin() const{
+    return array[1];
+}
+
 int main()
 {
     cout << "Hello, World!" <<endl;
