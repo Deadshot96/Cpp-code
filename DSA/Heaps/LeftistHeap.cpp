@@ -43,7 +43,7 @@ class LeftistHeap{
         LeftistNode *root;
 
         LeftistNode * merge(LeftistNode *, LeftistNode *);
-        LeftistHeap * merge1(LeftistNode *, LeftistNode *);
+        LeftistNode * merge1(LeftistNode *, LeftistNode *);
 
         void swapChildren(LeftistNode *);
         void reclainMemort(LeftistNode *);
@@ -87,6 +87,13 @@ typename LeftistHeap<Comparable> :: LeftistNode * LeftistHeap<Comparable> :: mer
 
     return h1;
 }
+
+template <typename Comparable>
+void LeftistHeap<Comparable> :: insert(const Comparable & x){
+    root = merge(new LeftistNode{x}, root);
+}
+
+
 
 int main()
 {
