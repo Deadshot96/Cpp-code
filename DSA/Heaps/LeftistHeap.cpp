@@ -121,6 +121,11 @@ bool LeftistHeap<Comparable> :: isEmpty() const{
     return root == nullptr;
 }
 
+template <typename Comparable>
+void LeftistHeap<Comparable> :: swapChildren(LeftistNode *t){
+    swap(t->left, t->right);
+}
+
 int main()
 {
     cout << "Hello, World!" << endl;
