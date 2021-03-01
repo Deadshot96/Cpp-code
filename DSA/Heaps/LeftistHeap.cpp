@@ -110,6 +110,12 @@ void LeftistHeap<Comparable> :: deleteMin(){
     delete oldRoot;
 }
 
+template <typename Comparable>
+void LeftistHeap<Comparable> :: deleteMin(Comparable & minItem){
+    minItem = findMin();
+    deleteMin();
+}
+
 int main()
 {
     cout << "Hello, World!" << endl;
