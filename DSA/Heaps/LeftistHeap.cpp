@@ -116,6 +116,11 @@ void LeftistHeap<Comparable> :: deleteMin(Comparable & minItem){
     deleteMin();
 }
 
+template <typename Comparable>
+bool LeftistHeap<Comparable> :: isEmpty() const{
+    return root == nullptr;
+}
+
 int main()
 {
     cout << "Hello, World!" << endl;
