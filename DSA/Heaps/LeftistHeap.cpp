@@ -50,6 +50,15 @@ class LeftistHeap{
         LeftistNode * clone(LeftistNode *) const;
 };
 
+template <typename Comparable>
+void LeftistHeap<Comparable> :: merge(LeftistHeap & rhs){
+    if (rhs == this)
+        return; // Avoid aliasing problem
+
+    root = merge(root, rhs.root);
+    rhs.root = nullptr;
+}
+
 int main()
 {
     cout << "Hello, World!" << endl;
