@@ -52,7 +52,7 @@ class LeftistHeap{
 
 template <typename Comparable>
 void LeftistHeap<Comparable> :: merge(LeftistHeap & rhs){
-    if (rhs == this)
+    if (&rhs == this)
         return; // Avoid aliasing problem
 
     root = merge(root, rhs.root);
