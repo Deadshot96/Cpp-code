@@ -93,7 +93,10 @@ void LeftistHeap<Comparable> :: insert(const Comparable & x){
     root = merge(new LeftistNode{x}, root);
 }
 
-
+template <typename Comparable>
+void LeftistHeap<Comparable> :: insert(Comparable && x){
+    root = merge(new LeftistNode{move(x)}, root);
+}
 
 int main()
 {
