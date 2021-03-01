@@ -14,7 +14,7 @@ class LeftistHeap{
         LeftistHeap & operator= (const LeftistHeap &);
         LeftistHeap & operator= (LeftistHeap &&);
 
-        bool isEmtpy() const;
+        bool isEmpty() const;
         const Comparable & findMin() const;
 
         void insert(const Comparable &);
@@ -96,6 +96,18 @@ void LeftistHeap<Comparable> :: insert(const Comparable & x){
 template <typename Comparable>
 void LeftistHeap<Comparable> :: insert(Comparable && x){
     root = merge(new LeftistNode{move(x)}, root);
+}
+
+template <typename Comparable>
+void LeftistHeap<Comparable> :: deleteMin(){
+    if(isEmpty()){
+        cout << "Underflow!\n";
+        return;
+    }
+
+    LeftistNode *oldRoot = root;
+    root = merge(root->left, root->right);
+    delete oldRoot;
 }
 
 int main()
