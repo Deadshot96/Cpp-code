@@ -59,6 +59,20 @@ void LeftistHeap<Comparable> :: merge(LeftistHeap & rhs){
     rhs.root = nullptr;
 }
 
+template <typename Comparable>
+typename LeftistHeap<Comparable> :: LeftistNode * LeftistHeap<Comparable> :: merge(LeftistNode *h1, LeftistNode *h2){
+    if (h1 == nullptr)
+        return h2;
+    
+    if (h2 == nullptr)
+        return h1;
+
+    if (h1->element < h2->element)
+        return merge1(h1, h2);
+    else
+        return merge1(h2, h1);
+}
+
 int main()
 {
     cout << "Hello, World!" << endl;
