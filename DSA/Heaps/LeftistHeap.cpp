@@ -73,6 +73,21 @@ typename LeftistHeap<Comparable> :: LeftistNode * LeftistHeap<Comparable> :: mer
         return merge1(h2, h1);
 }
 
+template <typename Comparable>
+typename LeftistHeap<Comparable> :: LeftistNode * LeftistHeap<Comparable> :: merge1(LeftistNode *h1, LeftistNode *h2){
+    
+    if (h1->left == nullptr) // Single Node
+        h1->left = h2;       // Other fields in h2 are already accurate
+    else{
+        h1->right = merge(h1->right, h2);
+        if (h1->left->npl < h1->right->npl)
+            swapChildren(h1);
+        h1->npl = h1->right->npl + 1;
+    }
+
+    return h1;
+}
+
 int main()
 {
     cout << "Hello, World!" << endl;
