@@ -8,6 +8,9 @@ void PrintArray(vector <Comparable>);
 template <typename Comparable>
 void SortAlgo(vector<Comparable> &a);
 
+template <typename Comparable>
+void Swap(vector<Comparable> &, size_t, size_t);
+
 int main()
 {
     vector<int> arr{20, 15, 49, 3, 44, 10, 20, 1, 12, 40, 78, 84, 39, 11};
@@ -31,4 +34,11 @@ void PrintArray(vector<Comparable> arr){
         cout << a << "\t";
     }
     cout << "\n";
+}
+
+template <typename Comparable>
+void Swap(vector <Comparable> & a, size_t i, size_t j){
+    Comparable tmp = a[i];
+    a[i] = a[j];
+    a[j] = a[i];
 }
