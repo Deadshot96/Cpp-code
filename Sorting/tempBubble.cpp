@@ -27,7 +27,7 @@ int main()
     cout << "Size of array: " << size << endl;
 
     // Calling the Function
-    
+    bubbleSort(arr);
 
     PrintArray(arr);
     return 0;
@@ -47,5 +47,18 @@ template <typename Comparable>
 void Swap(vector <Comparable> & a, size_t i, size_t j){
     Comparable tmp = a[i];
     a[i] = a[j];
-    a[j] = a[i];
+    a[j] = tmp;
+}
+
+template <typename Comparable>
+void bubbleSort(vector <Comparable> & a){
+    for (size_t i = 0; i < a.size() - 1; i++)
+    {
+        for (size_t j = 0; j < a.size() - 1 - i; j++)
+        {
+            if (a[j] > a[j + 1])
+                Swap(a, j, j + 1);
+        }
+    }
+    
 }
