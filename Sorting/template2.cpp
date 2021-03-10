@@ -47,5 +47,5 @@ template <typename Comparable>
 void Swap(vector <Comparable> & a, size_t i, size_t j){
     Comparable tmp = a[i];
     a[i] = a[j];
-    a[j] = a[i];
+    a[j] = tmp;
 }
