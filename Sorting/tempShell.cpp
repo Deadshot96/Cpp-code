@@ -6,16 +6,16 @@ template <typename Comparable>
 void PrintArray(vector <Comparable>);
 
 template <typename Comparable>
-void SortAlgo(vector<Comparable> &a);
+void shellSort(vector<Comparable> &a);
 
 template <typename Comparable>
 void Swap(vector<Comparable> &, size_t, size_t);
 
 template <typename Iterator>
-void SortAlgo(const Iterator &, const Iterator &);
+void shellSort(const Iterator &, const Iterator &);
 
 template <typename Iterator, typename Comparator>
-void SortAlgo(const Iterator &, const Iterator &, Comparator); 
+void shellSort(const Iterator &, const Iterator &, Comparator); 
 
 
 int main()
@@ -27,7 +27,7 @@ int main()
     cout << "Size of array: " << size << endl;
 
     // Calling the Function
-    
+    shellSort(arr);
 
     PrintArray(arr);
     return 0;
@@ -48,4 +48,22 @@ void Swap(vector <Comparable> & a, size_t i, size_t j){
     Comparable tmp = a[i];
     a[i] = a[j];
     a[j] = tmp;
+}
+
+template <typename Comparable>
+void shellSort(vector <Comparable> & a){
+    for (size_t gap = a.size() / 2; gap > 0; gap /= 2)
+    {
+        for (size_t i = gap; i < a.size(); i++)
+        {
+            Comparable tmp = std::move(a[i]);
+            size_t j = i;
+
+            while (j >= gap && tmp < a[j - gap]){
+                a[j] = std::move(a[j - gap]);
+                j -= gap;
+            }
+            a[j] = std::move(tmp);
+        }
+    }
 }
