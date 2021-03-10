@@ -6,7 +6,7 @@ template <typename Comparable>
 void PrintArray(vector <Comparable>);
 
 template <typename Comparable>
-void SortAlgo(vector<Comparable> &a);
+void insertionSort(vector<Comparable> &a);
 
 template <typename Comparable>
 void Swap(vector<Comparable> &, size_t, size_t);
@@ -20,7 +20,7 @@ int main()
     cout << "Size of array: " << size << endl;
 
     // Calling the Function
-    
+    insertionSort(arr);
 
     PrintArray(arr);
     return 0;
@@ -41,4 +41,16 @@ void Swap(vector <Comparable> & a, size_t i, size_t j){
     Comparable tmp = a[i];
     a[i] = a[j];
     a[j] = a[i];
+}
+
+template <typename Comparable>
+void insertionSort(vector <Comparable> & a){
+    for (size_t i = 1; i < a.size(); i++)
+    {   
+        Comparable tmp = std::move(a[i]);
+        size_t j;
+        for (j = i; j > 0 and tmp < a[j - 1]; j--)
+            a[j] = std::move(a[j - 1]);
+        a[j] = std::move(tmp);
+    }
 }
