@@ -6,7 +6,7 @@ template <typename Comparable>
 void PrintArray(vector <Comparable>);
 
 template <typename Comparable>
-void SortAlgo(vector<Comparable> &a);
+void SortAlgo(vector<Comparable> &);
 
 template <typename Comparable>
 void Swap(vector<Comparable> &, size_t, size_t);
