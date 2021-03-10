@@ -11,6 +11,12 @@ void insertionSort(vector<Comparable> &a);
 template <typename Comparable>
 void Swap(vector<Comparable> &, size_t, size_t);
 
+template <typename Iterator>
+void insertionSort(const Iterator &, const Iterator &);
+
+template <typename Iterator, typename Comparator>
+void insertionSort(const Iterator &, const Iterator &, Comparator);
+
 int main()
 {
     vector<int> arr{20, 15, 49, 3, 44, 10, 20, 1, 12, 40, 78, 84, 39, 11};
@@ -20,7 +26,9 @@ int main()
     cout << "Size of array: " << size << endl;
 
     // Calling the Function
-    insertionSort(arr);
+    // insertionSort(arr);
+    // insertionSort(arr.begin(), arr.end());
+    insertionSort(arr.begin(), arr.end(), greater<int> {});
 
     PrintArray(arr);
     return 0;
@@ -53,4 +61,27 @@ void insertionSort(vector <Comparable> & a){
             a[j] = std::move(a[j - 1]);
         a[j] = std::move(tmp);
     }
+}
+
+template <typename Iterator>
+void insertionSort(const Iterator & begin, const Iterator & end){
+    insertionSort(begin, end, less<decltype (*begin)>{});
+}
+
+template <typename Iterator, typename Comparator>
+void insertionSort(const Iterator & begin, const Iterator & end, Comparator lessThan){
+    if (begin == end)
+        return;
+
+    for (Iterator i = begin + 1; i < end; i++)
+    {
+        auto tmp = std::move(*i);
+        Iterator j;
+
+        for (j = i; j != begin && lessThan(tmp, *(j - 1)); j--)
+            *j = std::move(*(j - 1));
+
+        *j = std::move(tmp); 
+    }
+    
 }
