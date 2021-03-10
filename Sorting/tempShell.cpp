@@ -28,6 +28,8 @@ int main()
 
     // Calling the Function
     shellSort(arr);
+    shellSort(arr.begin(), arr.end());
+    shellSort(arr.begin(), arr.end(), greater<int>{});
 
     PrintArray(arr);
     return 0;
@@ -64,6 +66,31 @@ void shellSort(vector <Comparable> & a){
                 j -= gap;
             }
             a[j] = std::move(tmp);
+        }
+    }
+}
+
+template<typename Iterator>
+void shellSort(const Iterator & begin, const Iterator & end){
+    shellSort(begin, end, less<decltype (*begin)>{});
+}
+
+template<typename Iterator, typename Comparator>
+void shellSort(const Iterator & begin, const Iterator & end, Comparator lessThan){
+    size_t size = end - begin;
+
+    for (size_t gap = size / 2; gap > 0; gap /= 2)
+    {
+        for (Iterator i = begin + gap; i < end; i++)
+        {
+            auto tmp = std::move(*i);
+            Iterator j = i;
+
+            while (j >= (begin + gap) && lessThan(tmp, *(j - gap))){
+                *j = std::move(*(j - gap));
+                j -= gap;
+            }
+            *j = std::move(tmp);
         }
     }
 }
