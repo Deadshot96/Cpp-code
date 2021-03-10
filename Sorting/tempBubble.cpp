@@ -27,7 +27,9 @@ int main()
     cout << "Size of array: " << size << endl;
 
     // Calling the Function
-    bubbleSort(arr);
+    // bubbleSort(arr);
+    // bubbleSort(arr.begin(), arr.end());
+    bubbleSort(arr.begin(), arr.end(), greater<int>{});
 
     PrintArray(arr);
     return 0;
@@ -61,4 +63,27 @@ void bubbleSort(vector <Comparable> & a){
         }
     }
     
+}
+
+template <typename Iterator>
+void bubbleSort(const Iterator & begin, const Iterator & end){
+    bubbleSort(begin, end, less<decltype (*begin)>{});
+}
+
+template <typename Iterator, typename Comparator>
+void bubbleSort(const Iterator & begin, const Iterator & end, Comparator lessThan){
+    
+    if (begin == end)
+        return;
+
+    size_t sortedLength = 0;
+    for (Iterator i = begin; i < (end - 1); i++)
+    {
+        for (Iterator j = begin; j < (end - sortedLength - 1); j++)
+        {
+            if (lessThan(*(j + 1), *j))
+                std::swap(*j, *(j + 1));
+        }
+        sortedLength += 1;
+    }
 }
