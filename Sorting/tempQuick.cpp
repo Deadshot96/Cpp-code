@@ -6,17 +6,25 @@ template <typename Comparable>
 void PrintArray(vector <Comparable>);
 
 template <typename Comparable>
-void SortAlgo(vector<Comparable> &);
+void quickSort(vector<Comparable> &);
+
+template <typename Comparable>
+void quickSort(vector<Comparable> &, size_t, size_t);
+
+template <typename Comparable>
+const Comparable & median3(vector <Comparable> &, size_t, size_t);
 
 template <typename Comparable>
 void Swap(vector<Comparable> &, size_t, size_t);
 
 template <typename Iterator>
-void SortAlgo(const Iterator &, const Iterator &);
+void quickSort(const Iterator &, const Iterator &);
 
 template <typename Iterator, typename Comparator>
-void SortAlgo(const Iterator &, const Iterator &, Comparator); 
+void quickSort(const Iterator &, const Iterator &, Comparator); 
 
+template <typename Comparable>
+void insertionSort(vector<Comparable> &);
 
 int main()
 {
@@ -28,7 +36,7 @@ int main()
     cout << "Size of array: " << size << endl;
 
     // Calling the Function
-    
+    insertionSort(arr);
 
     PrintArray(arr);
     return 0;
@@ -49,4 +57,20 @@ void Swap(vector <Comparable> & a, size_t i, size_t j){
     Comparable tmp = a[i];
     a[i] = a[j];
     a[j] = tmp;
+}
+
+template <typename Comparable>
+void insertionSort(vector<Comparable> & a){
+    for (size_t i = 1; i < a.size(); i++)
+    {
+        Comparable tmp = std::move(a[i]);
+        size_t j = i;
+
+        while (j > 0 && a[j - 1] >= tmp){
+            a[j] = std::move(a[j - 1]);
+            j--;
+        }
+
+        a[j] = std::move(tmp);
+    }
 }
