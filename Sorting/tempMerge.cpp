@@ -23,6 +23,8 @@ void mergeSort(const Iterator &, const Iterator &);
 template <typename Iterator, typename Comparator>
 void mergeSort(const Iterator &, const Iterator &, Comparator); 
 
+template <typename Iterator, typename Comparator>
+void merge(const Iterator &, const Iterator &, const Iterator &, Comparator); 
 
 int main()
 {
@@ -34,6 +36,8 @@ int main()
 
     // Calling the Function
     mergeSort(arr);
+    mergeSort(arr.begin(), arr.end());
+    mergeSort(arr.begin(), arr.end(), greater<int>{});
 
     PrintArray(arr);
     return 0;
@@ -92,4 +96,59 @@ void merge(vector <Comparable> & a, vector <Comparable> & tempVec, size_t lo, si
 
     for (size_t i = lo; i <= hi; i++)
         a[i] = std::move(tempVec[i]);
+}
+
+template <typename Iterator>
+void mergeSort(const Iterator & begin, const Iterator & end){
+    mergeSort(begin, end - 1, less<decltype (*begin)> {});
+}
+
+template <typename Iterator, typename Comparator>
+void mergeSort(const Iterator & begin, const Iterator & end, Comparator lessThan){
+    
+    if (begin == end)
+        return;
+
+    Iterator mid = begin + (end - begin) / 2;
+    mergeSort(begin, mid, lessThan);
+    mergeSort(mid + 1, end, lessThan);
+    merge(begin, mid, end, lessThan);
+}
+
+template <typename Iterator, typename Comparator>
+void merge(const Iterator & begin, const Iterator & mid, const Iterator & end, Comparator lessThan){
+    
+    size_t sizeLeft = mid - begin + 1;
+    size_t sizeRight = end - mid;
+    
+    vector<std::decay_t<decltype(*begin)>> tempLeft(sizeLeft);
+    vector<std::decay_t<decltype(*begin)>> tempRight(sizeRight);
+
+    for (size_t i = 0; i < sizeLeft; i++)
+        tempLeft[i] = std::move(*(begin + i));
+    
+    for (size_t i = 0; i < sizeRight; i++)
+        tempRight[i] = std::move(*(mid + i + 1));
+
+    size_t i = 0, j = 0;
+    Iterator ptr = begin;
+
+    while (i < sizeLeft && j < sizeRight){
+        if (lessThan(tempLeft[i], tempRight[j]))
+            *ptr = std::move(tempLeft[i++]);
+        else
+            *ptr = std::move(tempRight[j++]);
+
+        ptr++;
+    }
+
+    while (i < sizeLeft){
+        *ptr = std::move(tempLeft[i++]);
+        ptr++;
+    }
+
+    while (j < sizeRight){
+        *ptr = std::move(tempRight[j++]);
+        ptr++;
+    }
 }
