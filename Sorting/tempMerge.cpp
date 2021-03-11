@@ -124,12 +124,9 @@ void merge(const Iterator & begin, const Iterator & mid, const Iterator & end, C
     vector<std::decay_t<decltype(*begin)>> tempLeft(sizeLeft);
     vector<std::decay_t<decltype(*begin)>> tempRight(sizeRight);
 
-    for (size_t i = 0; i < sizeLeft; i++)
-        tempLeft[i] = std::move(*(begin + i));
+    std::move(begin, mid + 1, tempLeft.begin());
+    std::move(mid + 1, end + 1, tempRight.begin());
     
-    for (size_t i = 0; i < sizeRight; i++)
-        tempRight[i] = std::move(*(mid + i + 1));
-
     size_t i = 0, j = 0;
     Iterator ptr = begin;
 
