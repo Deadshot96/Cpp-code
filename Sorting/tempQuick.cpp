@@ -24,7 +24,7 @@ template <typename Iterator, typename Comparator>
 void quickSort(const Iterator &, const Iterator &, Comparator); 
 
 template <typename Comparable>
-void insertionSort(vector<Comparable> &);
+void insertionSort(vector<Comparable> &, size_t, size_t);
 
 int main()
 {
@@ -36,7 +36,7 @@ int main()
     cout << "Size of array: " << size << endl;
 
     // Calling the Function
-    insertionSort(arr);
+    quickSort(arr, 0, arr.size() - 1);
 
     PrintArray(arr);
     return 0;
@@ -60,17 +60,87 @@ void Swap(vector <Comparable> & a, size_t i, size_t j){
 }
 
 template <typename Comparable>
-void insertionSort(vector<Comparable> & a){
-    for (size_t i = 1; i < a.size(); i++)
+void insertionSort(vector<Comparable> & a, size_t left, size_t right){
+    for (size_t i = left + 1; i <= right; i++)
     {
         Comparable tmp = std::move(a[i]);
         size_t j = i;
 
-        while (j > 0 && a[j - 1] >= tmp){
+        while (j > left && a[j - 1] >= tmp){
             a[j] = std::move(a[j - 1]);
             j--;
         }
 
         a[j] = std::move(tmp);
     }
+}
+
+template <typename Comparable>
+void quickSort(vector<Comparable> & a){
+    quickSort(a, 0, a.size() - 1);
+}
+
+template <typename Comparable>
+const Comparable & median3(vector<Comparable> & a, size_t left, size_t right){
+
+    /**
+     * Return median of left, center, and right.
+     * Order these and hide the pivot.
+    */
+    
+    size_t center = left + (right - left) / 2;
+
+    if (a[center] < a[left])
+        Swap(a, left, center);
+
+    if (a[right] < a[left])
+        Swap(a, right, left);
+
+    if (a[right] < a[center])
+        Swap(a, right, center);
+
+    // Place pivot at right - 1 index
+    Swap(a, center, right - 1);
+
+    return a[right - 1];
+}
+
+template <typename Comparable>
+void quickSort(vector<Comparable> & a, size_t left, size_t right){
+
+    /**
+     * Internal quicksort method that makes recursive calls.
+     * Uses median-of-three partitioning and a cutoff of 10.
+     * a is an array of Comparable items.
+     * left is the left-most index of the subarray.
+     * right is the right-most index of the subarray.
+    */
+
+    if (left + 10 <= right){
+
+        const Comparable & pivot = median3(a, left, right);
+
+        size_t i = left, j = right - 1;
+
+        while (true){
+            while (a[++i] < pivot);
+            while (pivot < a[--j]);
+
+            if (i < j)
+                Swap(a, i, j);
+            else 
+                break;
+        }
+
+        Swap(a, i, right - 1);
+
+        quickSort(a, left, i - 1);
+        quickSort(a, i + 1, right);
+    }
+    else{
+        insertionSort(a, left ,right);
+    }
+
+   
+
 }
