@@ -26,6 +26,9 @@ void quickSort(const Iterator &, const Iterator &, Comparator);
 template <typename Comparable>
 void insertionSort(vector<Comparable> &, size_t, size_t);
 
+template <typename Iterator, typename Comparator>
+void insertionSort(const Iterator &, const Iterator &, Comparator);
+
 int main()
 {
     vector<int> arr{20, 15, 49, 3, 44, 10, 20, 1, 12, 40, 78, 84, 39, 11, 23, 15,
@@ -70,7 +73,6 @@ void insertionSort(vector<Comparable> & a, size_t left, size_t right){
             a[j] = std::move(a[j - 1]);
             j--;
         }
-
         a[j] = std::move(tmp);
     }
 }
@@ -86,6 +88,8 @@ const Comparable & median3(vector<Comparable> & a, size_t left, size_t right){
     /**
      * Return median of left, center, and right.
      * Order these and hide the pivot.
+     * We hide pivot at right - 1 because the element at right is 
+     * already greater than the pivot so it doesn't violate the partitioning
     */
     
     size_t center = left + (right - left) / 2;
@@ -140,7 +144,24 @@ void quickSort(vector<Comparable> & a, size_t left, size_t right){
     else{
         insertionSort(a, left ,right);
     }
+}
 
-   
+template <typename Iterator, typename Comparator>
+void insertionSort(const Iterator & begin, const Iterator & end, Comparator lessThan){
 
+    if (begin == end)
+        return;
+
+    for (Iterator ptr = begin + 1; ptr != end; ptr++)
+    {
+        auto tmp = std::move(*ptr);
+        Iterator j = ptr;
+
+        while (j > begin && lessThan(tmp, *(j - 1))){
+            *j = std::move(*(j - 1));
+            j--;
+        }
+
+        *j = std::move(tmp);
+    }
 }
