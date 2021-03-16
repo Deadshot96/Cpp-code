@@ -29,6 +29,12 @@ void insertionSort(vector<Comparable> &, size_t, size_t);
 template <typename Iterator, typename Comparator>
 void insertionSort(const Iterator &, const Iterator &, Comparator);
 
+template <typename Iterator, typename Comparator>
+const Iterator partition(const Iterator &, const Iterator &, Comparator);
+
+template <typename Iterator>
+void PrintArray(const Iterator &, const Iterator&);
+
 int main()
 {
     vector<int> arr{20, 15, 49, 3, 44, 10, 20, 1, 12, 40, 78, 84, 39, 11, 23, 15,
@@ -39,8 +45,9 @@ int main()
     cout << "Size of array: " << size << endl;
 
     // Calling the Function
-    quickSort(arr, 0, arr.size() - 1);
-
+    // quickSort(arr.begin(), arr.end());
+    quickSort(arr.begin(), arr.end() - 1, less_equal<int> {});
+    
     PrintArray(arr);
     return 0;
 }
@@ -53,6 +60,16 @@ void PrintArray(vector<Comparable> arr){
         cout << a << "\t";
     }
     cout << "\n";
+}
+
+template <typename Iterator>
+void PrintArray(const Iterator & begin, const Iterator & end){
+    cout << "Array: ";
+    for (Iterator i = begin; i <= end; i++)
+    {
+        cout << *i << "\t";
+    }
+    cout << endl;
 }
 
 template <typename Comparable>
@@ -148,9 +165,8 @@ void quickSort(vector<Comparable> & a, size_t left, size_t right){
 
 template <typename Iterator, typename Comparator>
 void insertionSort(const Iterator & begin, const Iterator & end, Comparator lessThan){
-
-    if (begin == end)
-        return;
+    // if (begin == end)
+    //     return;
 
     for (Iterator ptr = begin + 1; ptr != end; ptr++)
     {
@@ -164,4 +180,45 @@ void insertionSort(const Iterator & begin, const Iterator & end, Comparator less
 
         *j = std::move(tmp);
     }
+}
+
+template <typename Iterator>
+void quickSort(const Iterator & begin, const Iterator & end){
+    quickSort(begin, end - 1, less<decltype (*begin)>{});
+}
+
+template <typename Iterator, typename Comparator>
+const Iterator partition(const Iterator & begin, const Iterator & end, Comparator lessThan){
+    
+    Iterator i = begin, j = begin;
+    auto pivot = std::move(*end);
+
+    for (j = begin; j <= end; j++){
+
+        if (lessThan(*j, pivot)){
+            std::swap(*i, *j);
+            i++;
+        }
+        
+        if (!lessThan(*j, pivot) && !lessThan(pivot, *j)){
+            std::swap(*i, *j);
+            i++;
+        }
+    }
+
+    return i - 1;
+}
+
+template <typename Iterator, typename Comparator>
+void quickSort(const Iterator & begin, const Iterator & end, Comparator lessThan){
+    
+    if (begin >= end)
+        return;
+
+    const Iterator partitionIdx = partition(begin, end, lessThan);
+    
+    quickSort(begin, partitionIdx - 1, lessThan);
+    quickSort(partitionIdx + 1, end, lessThan);
+
+    
 }
