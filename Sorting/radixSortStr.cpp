@@ -15,14 +15,34 @@ void radixSort(vector <string> & arr, int maxLen){
     vector<vector<string>> wordsByLen (maxLen + 1);
     vector<vector<string>> buckets (BUCKETS);
     
-    for (auto &s : arr)
+    for (string &s : arr)
         wordsByLen[s.length()].push_back(std::move(s));
 
     size_t idx = 0;
-    
 
+    for (auto & i : wordsByLen)
+        for (string & s: i)
+            arr[idx++] = std::move(s);
 
+    int startingIdx = arr.size();
 
+    for (int pos = maxLen - 1; pos >= 0; pos--)
+    {
+        startingIdx -= wordsByLen[pos + 1].size();
+
+        for (int i = startingIdx; i < arr.size(); i++)
+            buckets[arr[i][pos]].push_back(std::move(arr[i]));
+
+        idx = startingIdx;
+
+        for (auto & thisBucket : buckets)
+        {
+            for (string & s : thisBucket)
+                arr[idx++] = std::move(s);
+
+            thisBucket.clear();    
+        }
+    }
 }
 
 int main()
