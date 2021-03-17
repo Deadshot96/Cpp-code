@@ -52,6 +52,15 @@ int DisjSets :: find(int x) const{
         return find(s[x]);
 }
 
+
+// This find implements the path compression technique
+int DisjSets :: find(int x){
+    if (s[x] < 0)
+        return x;
+    else
+        return s[x] = find(s[x]);
+}
+
 int main()
 {
     cout << "Hello, World!" << endl;
