@@ -21,7 +21,10 @@ template <typename Iterator>
 void quickSort(const Iterator &, const Iterator &);
 
 template <typename Iterator, typename Comparator>
-void quickSort(const Iterator &, const Iterator &, Comparator); 
+void quickSort(const Iterator &, const Iterator &, Comparator);
+
+template <typename Iterator, typename Comparator>
+void __quickSort(const Iterator &, const Iterator &, Comparator);
 
 template <typename Comparable>
 void insertionSort(vector<Comparable> &, size_t, size_t);
@@ -45,8 +48,8 @@ int main()
     cout << "Size of array: " << size << endl;
 
     // Calling the Function
-    // quickSort(arr.begin(), arr.end());
-    quickSort(arr.begin(), arr.end() - 1, less_equal<int> {});
+    quickSort(arr.begin(), arr.end());
+    // quickSort(arr.begin(), arr.end(), less<int> {});
     
     PrintArray(arr);
     return 0;
@@ -184,7 +187,12 @@ void insertionSort(const Iterator & begin, const Iterator & end, Comparator less
 
 template <typename Iterator>
 void quickSort(const Iterator & begin, const Iterator & end){
-    quickSort(begin, end - 1, less<decltype (*begin)>{});
+    __quickSort(begin, end - 1, less<decltype (*begin)>{});
+}
+
+template <typename Iterator, typename Comparator>
+void quickSort(const Iterator & begin, const Iterator & end, Comparator lessThan){
+    __quickSort(begin, end - 1, lessThan);
 }
 
 template <typename Iterator, typename Comparator>
@@ -210,15 +218,15 @@ const Iterator partition(const Iterator & begin, const Iterator & end, Comparato
 }
 
 template <typename Iterator, typename Comparator>
-void quickSort(const Iterator & begin, const Iterator & end, Comparator lessThan){
+void __quickSort(const Iterator & begin, const Iterator & end, Comparator lessThan){
     
     if (begin >= end)
         return;
 
     const Iterator partitionIdx = partition(begin, end, lessThan);
     
-    quickSort(begin, partitionIdx - 1, lessThan);
-    quickSort(partitionIdx + 1, end, lessThan);
+    __quickSort(begin, partitionIdx - 1, lessThan);
+    __quickSort(partitionIdx + 1, end, lessThan);
 
     
 }
