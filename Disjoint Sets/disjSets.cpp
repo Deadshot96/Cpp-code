@@ -8,6 +8,7 @@ class DisjSets{
         int find(int) const;
         int find(int);
         void unionSets(int, int);
+        void unionSetsByHeight(int, int);
 
     private:
         vector<int> s;
@@ -28,6 +29,15 @@ void DisjSets :: unionSets(int root1, int root2){
     s[root2] = root1;
 }
 
+void DisjSets :: unionSetsByHeight(int root1, int root2){
+    if (s[root1] < s[root2]) // root1 is deeper
+        s[root1] = root2;
+    else{
+        if (s[root1] == s[root2])
+            --s[root1];
+        s[root2] = root1;
+    }
+}
 
 /**
  * Perform a find.
