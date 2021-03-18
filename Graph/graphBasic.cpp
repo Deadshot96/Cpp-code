@@ -56,17 +56,23 @@ int main()
 {
     cout << "Hello, World!" << endl;
 
-    Graph g(4);
+    Graph g(7);
+    g.addEdge(3, 0);
+    g.addEdge(3, 1);
+    g.addEdge(3, 4);
+    g.addEdge(3, 6);
+    g.addEdge(3, 5);
+    g.addEdge(3, 2);
     g.addEdge(0, 1);
-    g.addEdge(0, 2);
-    g.addEdge(1, 2);
+    g.addEdge(1, 4);
+    g.addEdge(4, 6);
+    g.addEdge(6, 5);
+    g.addEdge(5, 2);
     g.addEdge(2, 0);
-    g.addEdge(2, 3);
-    g.addEdge(3, 3);
+    
 
-    cout << "Following is Breadth First Traversal "
-         << "(starting from vertex 2) \n";
-    g.BFS(2);
+    cout << "Breadth First Traversal: \n";
+    g.BFS(3);
     
     return 0;
 }
