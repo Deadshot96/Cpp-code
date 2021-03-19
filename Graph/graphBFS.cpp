@@ -30,8 +30,8 @@ void Graph<Hashable> :: addEdge(Hashable u, Hashable v){
     vertices.insert(u);
     vertices.insert(v);
 
-    adjList[u] = v;
-    adjList[v] = u;
+    adjList[u].push_back(v);
+    adjList[v].push_back(u);
 }
 
 int main()
