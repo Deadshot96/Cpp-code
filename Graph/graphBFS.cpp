@@ -20,8 +20,38 @@ class Graph{
         void BFS(const Hashable &) const;
 };
 
+template <typename Hashable>
+Graph<Hashable> :: Graph(int numVertices){
+    this->numVertices = numVertices;
+}
+
+template <typename Hashable>
+void Graph<Hashable> :: addEdge(Hashable u, Hashable v){
+    vertices.insert(u);
+    vertices.insert(v);
+
+    adjList[u] = v;
+    adjList[v] = u;
+}
+
 int main()
 {
     cout << "Hello, World!" << endl;
+
+    Graph<int> g(7);
+
+    g.addEdge(3, 0);
+    g.addEdge(3, 1);
+    g.addEdge(3, 4);
+    g.addEdge(3, 6);
+    g.addEdge(3, 5);
+    g.addEdge(3, 2);
+    g.addEdge(0, 1);
+    g.addEdge(1, 4);
+    g.addEdge(4, 6);
+    g.addEdge(6, 5);
+    g.addEdge(5, 2);
+    g.addEdge(2, 0);
+
     return 0;
 }
