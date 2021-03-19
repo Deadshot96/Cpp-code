@@ -2,6 +2,7 @@
 # include <list>
 # include <unordered_map>
 # include <unordered_set>
+using namespace std;
 
 /*
     A mother vertex in a graph G = (V,E) is a vertex v 
