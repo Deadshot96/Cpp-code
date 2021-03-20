@@ -52,6 +52,14 @@ void Graph<Hashable> :: addEdge(const Hashable & u, const Hashable & v){
     adjList[u].push_back(v);
 }
 
+template <typename Hashable>
+void Graph<Hashable> :: DFS(const Hashable & v) const{
+    cout << "Depth First Search: " << endl;
+    unordered_map<Hashable, bool> visited;
+    DFSUtil(v, visited);
+    cout << endl;
+}
+
 int main()
 {
     cout << "Hello, World!" << endl;
