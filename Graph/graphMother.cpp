@@ -80,8 +80,8 @@ template <typename Hashable>
 Hashable Graph<Hashable> :: findMother() const{
     unordered_map<Hashable, bool> visited;
 
-    for (const Hashable & vertex: vertices)
-        visited[vertex] = false;
+    // for (const Hashable & vertex: vertices)
+    //     visited[vertex] = false;
 
     Hashable v;
 
