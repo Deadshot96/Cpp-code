@@ -32,6 +32,19 @@ Graph<Hashable> :: Graph(int numVertices){
 }
 
 template <typename Hashable>
+void Graph<Hashable> :: DFS() const{
+    cout << "Depth First Search: \n";
+    unordered_map<Hashable, bool> visited;
+    
+    for (auto &i: adjList){
+        if (!visited[i.first]){
+            DFSUtil(i.first, visited);
+            cout << endl;
+        }
+    }
+}
+
+template <typename Hashable>
 void Graph<Hashable> :: addEdge(const Hashable & u, const Hashable & v){
     vertices.insert(u);
     vertices.insert(v);
