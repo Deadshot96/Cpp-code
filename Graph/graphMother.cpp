@@ -24,6 +24,7 @@ class Graph{
         void addEdge(Hashable, Hashable);
         void DFS() const;
         void DFS(const Hashable &) const;
+        Hashable findMother() const;
 };
 
 template <typename Hashable>
@@ -75,6 +76,33 @@ void Graph<Hashable> :: DFSUtil(const Hashable & v, unordered_map<Hashable, bool
             DFSUtil(*itr, visited);
 }
 
+template <typename Hashable>
+Hashable Graph<Hashable> :: findMother() const{
+    unordered_map<Hashable, bool> visited;
+
+    for (const Hashable & vertex: vertices)
+        visited[vertex] = false;
+
+    Hashable v;
+
+    for (const Hashable & vertex: vertices){
+        if (!visited[vertex]){
+            DFSUtil(vertex, visited);
+            v = vertex;
+        }
+    }
+
+    for (const Hashable & vertex: vertices)
+        visited[vertex] = false;
+
+    DFSUtil(v, visited);
+
+    for (const Hashable & vertex: vertices)
+        if (!visited[vertex])
+            return -1;
+
+    return v;    
+}
 
 int main()
 {
@@ -95,6 +123,9 @@ int main()
 
     g.DFS();
     g.DFS(4);
+
+    const int mother = g.findMother();
+    cout << endl << "Mother vertex: " << mother << endl;
 
     return 0;
 }
