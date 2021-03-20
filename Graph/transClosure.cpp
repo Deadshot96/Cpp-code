@@ -77,8 +77,37 @@ void Graph<Hashable> :: DFSUtil(const Hashable & v, unordered_map<Hashable, bool
 
 }
 
+template <typename Hashable>
+void Graph<Hashable> :: printTransClosure(){
+    transClosure();
+
+    cout << "Transitive Closure: \n";
+    for (size_t i = 0; i < numVertices; i++){
+        for (size_t j = 0; j < numVertices; j++){
+            cout << transClosureMat[i][j] << "\t";
+        }
+        cout << endl;
+    }
+}
+
 int main()
 {
     cout << "Hello, World!" << endl;
+    Graph <int> g(7);
+    g.addEdge(2, 0);
+    g.addEdge(2, 5);
+    g.addEdge(0, 1);
+    g.addEdge(0, 3);
+    g.addEdge(1, 3);
+    g.addEdge(1, 4);
+    g.addEdge(4, 6);
+    g.addEdge(6, 5);
+    g.addEdge(3, 2);
+    g.addEdge(3, 5);
+    g.addEdge(3, 6);
+    g.addEdge(3, 4);
+
+    g.DFS();
+    g.DFS(4);
     return 0;
 }
