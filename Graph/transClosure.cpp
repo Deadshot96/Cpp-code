@@ -15,7 +15,8 @@ class Graph{
         
         void DFSUtil(const Hashable &, unordered_map<Hashable, bool> &) const;
         void DFSUtil(const Hashable &, const Hashable &);
-        void transClosure();
+        void transClosureV1();
+        void transClosureV2();
 
     public:
         Graph(size_t);
@@ -73,24 +74,40 @@ void Graph<Hashable> :: DFSUtil(const Hashable & v, unordered_map<Hashable, bool
     for (itr = links.begin(); itr != links.end(); ++itr)
         if (!visited[*itr])
             DFSUtil(*itr, visited);
-
 }
 
 template <typename Hashable>
 void Graph<Hashable> :: printTransClosure(){
-    transClosure();
 
-    cout << "Transitive Closure: \n";
+    for (auto& vec: transClosureMat)
+        std::fill(vec.begin(), vec.end(), false);
+    
+    transClosureV1();
+    cout << "Transitive Closure: O(V^2)\n";
     for (size_t i = 0; i < numVertices; i++){
         for (size_t j = 0; j < numVertices; j++){
             cout << transClosureMat[i][j] << "\t";
         }
         cout << endl;
     }
+    cout << endl;
+
+
+    for (auto& vec: transClosureMat)
+        std::fill(vec.begin(), vec.end(), false);
+    transClosureV2();
+    cout << "Transitive Closure: O(V^3)\n";
+    for (size_t i = 0; i < numVertices; i++){
+        for (size_t j = 0; j < numVertices; j++){
+            cout << transClosureMat[i][j] << "\t";
+        }
+        cout << endl;
+    }
+    cout << endl;
 }
 
 template <typename Hashable>
-void Graph<Hashable> :: transClosure(){
+void Graph<Hashable> :: transClosureV1(){
     for (const Hashable & i : vertices)
         DFSUtil(i, i);
 }
@@ -108,6 +125,26 @@ void Graph<Hashable> :: DFSUtil(const Hashable & u, const Hashable & v){
     for (itr = links.begin(); itr != links.end(); ++itr)
         if (!transClosureMat[u][*itr])
             DFSUtil(u, *itr);
+}
+
+template <typename Hashable>
+void Graph<Hashable> :: transClosureV2(){
+    typename unordered_set<Hashable>::const_iterator i, j, k;
+
+    for (auto& i : vertices){
+        transClosureMat[i][i] = true;
+        for (Hashable& j: adjList[i]){
+            transClosureMat[i][j] = true;
+        }
+    }
+
+    for (k = vertices.begin(); k != vertices.end(); ++k){
+        for (i = vertices.begin(); i != vertices.end(); ++i){
+            for (j = vertices.begin(); j != vertices.end(); ++j){
+                transClosureMat[*i][*j] = transClosureMat[*i][*j] || (transClosureMat[*i][*k] && transClosureMat[*k][*j]);
+            }
+        }
+    }   
 }
 
 int main()
