@@ -10,6 +10,22 @@ using namespace std;
     a path from v.
 */
 
+template <typename Hashable>
+class Graph{
+    private:
+        int numVertices;
+        unordered_set<Hashable> vertices;
+        unordered_map<Hashable, list<Hashable>> adjList;
+
+        void DFSUtil(const Hashable &, unordered_map<Hashable, bool>) const;
+
+    public:
+        Graph(int);
+        void addEdge(Hashable, Hashable);
+        void DFS() const;
+        void DFS(Hashable) const;
+};
+
 int main()
 {
     cout << "Hello, World!" << endl;
