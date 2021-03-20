@@ -131,6 +131,14 @@ template <typename Hashable>
 void Graph<Hashable> :: transClosureV2(){
     typename unordered_set<Hashable>::const_iterator i, j, k;
 
+    /* 
+        Initialize the solution matrix same
+        as input graph matrix. Or
+        we can say the initial values of 
+        shortest distances are based
+        on shortest paths considering 
+        no intermediate vertex. 
+    */
     for (auto& i : vertices){
         transClosureMat[i][i] = true;
         for (Hashable& j: adjList[i]){
@@ -138,9 +146,35 @@ void Graph<Hashable> :: transClosureV2(){
         }
     }
 
+    /* 
+        Add all vertices one by one to the
+        set of intermediate vertices.
+            ---> Before start of a iteration, 
+            we have reachability values for
+            all pairs of vertices such that
+            the reachability values 
+            consider only the vertices in 
+            set {0, 1, 2, .. k-1} as 
+            intermediate vertices.
+            ----> After the end of a iteration, 
+            vertex no. k is added to the 
+            set of intermediate vertices 
+            and the set becomes {0, 1, .. k} 
+    */
+
+
     for (k = vertices.begin(); k != vertices.end(); ++k){
+        // Pick all vertices as 
+        // source one by one
         for (i = vertices.begin(); i != vertices.end(); ++i){
+            // Pick all vertices as 
+            // destination for the
+            // above picked source
             for (j = vertices.begin(); j != vertices.end(); ++j){
+                // If vertex k is on a path
+                // from i to j,
+                // then make sure that the value
+                // of reach[i][j] is 1
                 transClosureMat[*i][*j] = transClosureMat[*i][*j] || (transClosureMat[*i][*k] && transClosureMat[*k][*j]);
             }
         }
