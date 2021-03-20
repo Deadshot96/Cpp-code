@@ -8,28 +8,27 @@ using namespace std;
 template <typename Hashable>
 class Graph{
     private:
-        int numVertices;
+        size_t numVertices;
         unordered_set<Hashable> vertices;
         unordered_map<Hashable, list<Hashable>> adjList;
-        vector<vector<Hashable>> transClosureMat;
+        vector<vector<bool>> transClosureMat;
         
         void DFSUtil(const Hashable &, unordered_map<Hashable, bool> &) const;
         void DFSUtil(const Hashable &, const Hashable &);
         void transClosure();
 
     public:
-        Graph(int);
+        Graph(size_t);
         void addEdge(const Hashable &, const Hashable &);
         void DFS() const;
         void DFS(const Hashable &) const;
-        void printTransClosure() const;
+        void printTransClosure();
 };
 
 template <typename Hashable>
-Graph<Hashable> :: Graph(int numVertices){
-    this->numVertices = numVertices;
-    vector<vector<bool>> transClosureMat(numVertices, vector<bool>(numVertices, false));
-}
+Graph<Hashable> :: Graph(size_t numVertices)
+    :numVertices(numVertices), transClosureMat(numVertices, vector<bool>(numVertices, false))
+    {}
 
 template <typename Hashable>
 void Graph<Hashable> :: DFS() const{
@@ -90,6 +89,27 @@ void Graph<Hashable> :: printTransClosure(){
     }
 }
 
+template <typename Hashable>
+void Graph<Hashable> :: transClosure(){
+    for (const Hashable & i : vertices)
+        DFSUtil(i, i);
+}
+
+template <typename Hashable>
+void Graph<Hashable> :: DFSUtil(const Hashable & u, const Hashable & v){
+    transClosureMat[u][v] = true;
+    
+    if (adjList.find(v) == adjList.end())
+        return;
+
+    const list<Hashable> & links = adjList.at(v);
+    typename list<Hashable> :: const_iterator itr;
+
+    for (itr = links.begin(); itr != links.end(); ++itr)
+        if (!transClosureMat[u][*itr])
+            DFSUtil(u, *itr);
+}
+
 int main()
 {
     cout << "Hello, World!" << endl;
@@ -109,5 +129,7 @@ int main()
 
     g.DFS();
     g.DFS(4);
+    g.printTransClosure();
+
     return 0;
 }
