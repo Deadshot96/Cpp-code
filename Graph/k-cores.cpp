@@ -22,10 +22,25 @@ class Graph{
 
     public:
         Graph(size_t);
+        void addEdge(const Hashable &, const Hashable &);
         void DFS() const;
         void DFS(const Hashable &) const;
         void findKCores() const;
 };
+
+template <typename Hashable>
+Graph<Hashable> :: Graph(size_t V)
+    : V(V) {}
+
+template <typename Hashable>
+void Graph<Hashable> :: addList(const Hashable &u, const Hashable &v){
+    vertices.insert(u);
+    vertices.insert(v);
+
+    addList[u].push_back(v);
+    addList[v].push_back(u);
+}
+
 
 int main(int argc, char const *argv[])
 {
