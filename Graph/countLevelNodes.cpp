@@ -56,6 +56,7 @@ void Graph<Hashable> :: BFSUtil(const Hashable & u, unordered_map<Hashable, bool
 
     while (!queue.empty()){
         const Hashable & vertex = queue.front();
+        queue.pop_front();
 
         if (!visited[vertex]){
             cout << vertex << "\t";
@@ -91,6 +92,9 @@ int main()
     g.addEdge(6, 5);
     g.addEdge(5, 2);
     g.addEdge(2, 0);
+
+    g.BFS();
+    g.BFS(5);
 
     return 0;
 }
