@@ -8,20 +8,25 @@ template <typename Hashable>
 class Graph{
     private:
         size_t numV;
+        bool levelDataFlag;
         unordered_map<Hashable, list<Hashable>> adjList;
         unordered_set<Hashable> vertices;
+        unordered_map<Hashable, int> nodeLevelData;
+        unordered_map<int, int> levelSizeData;
         void BFSUtil(const Hashable &, unordered_map<Hashable, bool> &) const;
+        void setLevelData();
 
     public:
         Graph(size_t);
         void addEdge(const Hashable &, const Hashable &);
         void BFS() const;
         void BFS(const Hashable &) const;
+        void printLevelData() const;
 };
 
 template <typename Hashable>
 Graph<Hashable> :: Graph(size_t numV)
-    :numV{numV} {};
+    :numV{numV}, levelDataFlag{false} {};
 
 template <typename Hashable>
 void Graph<Hashable> :: addEdge(const Hashable & u, const Hashable & v){
