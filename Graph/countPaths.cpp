@@ -13,13 +13,21 @@ class Graph{
 
     public:
         Graph(size_t);
-        addEdge(const Hashable &, const Hashable &);
+        void addEdge(const Hashable &, const Hashable &);
         void countPaths(const Hashable &, const Hashable &);
 };
 
 template <typename Hashable>
 Graph<Hashable> :: Graph(size_t numV)
     :numV(numV) {}
+
+template <typename Hashable>
+void Graph<Hashable> :: addEdge(const Hashable &, const Hashable &){
+    vertices.insert(u);
+    vertices.insert(v);
+
+    addEdge[u].push_back(v);
+}
 
 int main()
 {
