@@ -19,6 +19,10 @@ class Graph{
         void BFS(const Hashable &) const;
 };
 
+template <typename Hashable>
+Graph<Hashable> :: Graph(size_t numV)
+    :numV{numV}
+
 int main()
 {
     cout << "Hello, World!\n";
