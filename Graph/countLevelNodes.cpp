@@ -8,25 +8,24 @@ template <typename Hashable>
 class Graph{
     private:
         size_t numV;
-        bool levelDataFlag;
         unordered_map<Hashable, list<Hashable>> adjList;
         unordered_set<Hashable> vertices;
-        unordered_map<Hashable, int> nodeLevelData;
-        unordered_map<int, int> levelSizeData;
+        unordered_map<Hashable, size_t> nodeLevelData;
+        unordered_map<size_t, size_t> levelSizeData;
         void BFSUtil(const Hashable &, unordered_map<Hashable, bool> &) const;
-        void setLevelData();
+        void setLevelData(const Hashable &);
 
     public:
         Graph(size_t);
         void addEdge(const Hashable &, const Hashable &);
         void BFS() const;
         void BFS(const Hashable &) const;
-        void printLevelData() const;
+        void printLevelData(const Hashable &);
 };
 
 template <typename Hashable>
 Graph<Hashable> :: Graph(size_t numV)
-    :numV{numV}, levelDataFlag{false} {};
+    :numV{numV} {};
 
 template <typename Hashable>
 void Graph<Hashable> :: addEdge(const Hashable & u, const Hashable & v){
@@ -80,6 +79,57 @@ void Graph<Hashable> :: BFSUtil(const Hashable & u, unordered_map<Hashable, bool
     }
 }
 
+template <typename Hashable>
+void Graph<Hashable> :: setLevelData(const Hashable & root){
+    nodeLevelData.clear();
+    levelSizeData.clear();
+
+    unordered_map<Hashable, bool> visited;
+    list<Hashable> queue;
+
+    nodeLevelData[root] = 0;
+    visited[root] = true;
+    queue.push_back(root);
+
+    while (!queue.empty()){
+        const Hashable & v = queue.front();
+        queue.pop_front();
+
+        if (adjList.find(v) == adjList.end())
+            continue;
+
+        list<Hashable> links = adjList.at(v);
+        typename list<Hashable> :: const_iterator itr;
+
+        for (itr = links.begin(); itr != links.end(); ++itr){
+            if (!visited[*itr]){
+                visited[*itr] = true;
+                nodeLevelData[*itr] = nodeLevelData[v] + 1;
+                queue.push_back(*itr);
+            }
+        }
+    }
+
+    for (auto p: nodeLevelData){
+        levelSizeData[p.second] += 1;
+    }
+}
+
+template <typename Hashable>
+void Graph<Hashable> :: printLevelData(const Hashable & root){
+    this->setLevelData(root);
+
+    cout << "Node's levels: \n";
+    for (auto p: this->nodeLevelData)
+        cout << p.first << ":\t" << p.second << "\n";
+    // cout << endl;
+
+    cout << "Level sizes: \n";
+    for (auto p: this->levelSizeData)
+        cout << p.first << ":\t" << p.second << "\n";
+    // cout << endl;
+}
+
 int main()
 {
     cout << "Hello, World!\n";
@@ -99,7 +149,9 @@ int main()
     g.addEdge(2, 0);
 
     g.BFS();
-    g.BFS(5);
+    g.BFS(4);
+
+    g.printLevelData(3);
 
     return 0;
 }
