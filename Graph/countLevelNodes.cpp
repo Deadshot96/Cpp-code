@@ -21,7 +21,7 @@ class Graph{
 
 template <typename Hashable>
 Graph<Hashable> :: Graph(size_t numV)
-    :numV{numV};
+    :numV{numV} {};
 
 template <typename Hashable>
 void Graph<Hashable> :: addEdge(const Hashable & u, const Hashable & v){
@@ -47,6 +47,31 @@ void Graph<Hashable> :: BFS(const Hashable & v) const{
     unordered_map<Hashable, bool> visited;
     BFSUtil(v, visited);
     cout << endl;
+}
+
+template <typename Hashable>
+void Graph<Hashable> :: BFSUtil(const Hashable & u, unordered_map<Hashable, bool> & visited) const{
+    list<Hashable> queue;
+    queue.push_back(u);
+
+    while (!queue.empty()){
+        const Hashable & vertex = queue.front();
+
+        if (!visited[vertex]){
+            cout << vertex << "\t";
+            visited[vertex] = true;
+        }
+
+        if (adjList.find(vertex) == adjList.end())
+            continue;
+
+        const list<Hashable> & links = adjList.at(vertex);
+        typename list<Hashable> :: const_iterator itr;
+
+        for (itr = links.begin(); itr != links.end(); ++itr)
+            if (!visited[*itr])
+                queue.push_back(*itr);
+    }
 }
 
 int main()
