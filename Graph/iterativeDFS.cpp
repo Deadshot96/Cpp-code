@@ -4,6 +4,7 @@
 # include <unordered_map>
 # include <unordered_set>
 
+template <typename Hashable>
 class Graph{
 
 };
