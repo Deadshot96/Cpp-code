@@ -38,7 +38,7 @@ void Graph<Hashable> :: DFS() const{
     unordered_map<Hashable, bool> visited;
     cout << "Depth First Search (Iterative): \n";
     for (const Hashable & vertex: vertices)
-        DFS(vertex, visited);
+        DFSUtil(vertex, visited);
     cout << endl;
 }
 
@@ -46,7 +46,7 @@ template <typename Hashable>
 void Graph<Hashable> :: DFS(const Hashable & vertex) const{
     unordered_map<Hashable, bool> visited;
     cout << "Depth First Search (Iterative): \n";
-    DFS(vertex);
+    DFSUtil(vertex, visited);
     cout << endl;
 }
 
@@ -56,7 +56,8 @@ void Graph<Hashable> :: DFSUtil(const Hashable &u, unordered_map<Hashable, bool>
     st.push(u);
 
     while (!st.empty()){
-        Hashable vertex = st.pop();
+        Hashable vertex = st.top();
+        st.pop();
 
         if (!visited[vertex]){
             cout << vertex << "\t";
@@ -70,7 +71,8 @@ void Graph<Hashable> :: DFSUtil(const Hashable &u, unordered_map<Hashable, bool>
         typename list<Hashable> :: const_iterator itr;
 
         for (itr = links.begin(); itr != links.end(); ++itr)
-            st.push(*itr);
+            if (!visited[*itr])
+                st.push(*itr);
     }
 }
 
@@ -91,5 +93,8 @@ int main()
     g.addEdge(6, 5);
     g.addEdge(5, 2);
     g.addEdge(2, 0);
+
+    g.DFS();
+    g.DFS(5);
     return 0;
 }
