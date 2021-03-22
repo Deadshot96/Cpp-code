@@ -32,10 +32,27 @@ void Graph<Hashable> :: addEdge(const Hashable & u, const Hashable & v){
     adjList[v].push_back(u);
 }
 
+template <typename Hashable>
+void Graph<Hashable> :: BFS() const{
+    cout << "Breath First Search: \n";
+    unordered_map<Hashable, bool> visited;
+    for (const Hashable & vertex: vertices)
+        BFSUtil(vertex, visited);
+    cout << endl;
+}
+
+template <typename Hashable>
+void Graph<Hashable> :: BFS(const Hashable & v) const{
+    cout << "Breath First Search: \n";
+    unordered_map<Hashable, bool> visited;
+    BFSUtil(v, visited);
+    cout << endl;
+}
+
 int main()
 {
     cout << "Hello, World!\n";
-    
+
     Graph<int> g(7);
     g.addEdge(3, 0);
     g.addEdge(3, 1);
