@@ -6,7 +6,17 @@ using namespace std;
 
 template <typename Hashable>
 class Graph{
+    private:
+        size_t numV;
+        unordered_map<Hashable, list<Hashable>> adjList;
+        unordered_set<Hashable> vertices;
+        void BFSUtil(const Hashable &, unordered_map<Hashable, bool> &) const;
 
+    public:
+        Graph(size_t);
+        void addEdge(const Hashable &, const Hashable &);
+        void BFS() const;
+        void BFS(const Hashable &) const;
 };
 
 int main()
