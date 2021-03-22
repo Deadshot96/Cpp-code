@@ -22,15 +22,23 @@ Graph<Hashable> :: Graph(size_t numV)
     :numV(numV) {}
 
 template <typename Hashable>
-void Graph<Hashable> :: addEdge(const Hashable &, const Hashable &){
+void Graph<Hashable> :: addEdge(const Hashable & u, const Hashable & v){
     vertices.insert(u);
     vertices.insert(v);
 
-    addEdge[u].push_back(v);
+    adjList[u].push_back(v);
 }
 
 int main()
 {
     cout << "Hello, World!\n";
+    Graph<char> g(5);
+    g.addEdge('A', 'B');
+    g.addEdge('A', 'C');
+    g.addEdge('A', 'E');
+    g.addEdge('B', 'D');
+    g.addEdge('B', 'E');
+    g.addEdge('D', 'C');
+
     return 0;
 }
